@@ -36,16 +36,21 @@ const isPal = str => {
 
 //------------Solution Check------------------
 const inputs = [
-  ["car", "false"],
-  ["racecar", "true"],
-  ["RaCecAr", "true"],
-  ["!? 100 ABCcba 001 ?!", "true"],
-  ["", "true"],
+  ["false", "car"],
+  ["true", "racecar"],
+  ["true", "RaCecAr"],
+  ["true", "!? 100 ABCcba 001 ?!"],
+  ["true", ""],
 ];
+
+const fn = isPal;
 
 const solutionCheck = inputs => {
   for (let input of inputs) {
-    console.log("Correct Answer:", input[1], "Result:", isPal(input[0]));
+    const answer = input[0];
+    const arg1 = input[1];
+
+    console.log("Answer:", answer, "Result:", fn(arg1));
   }
 };
 
