@@ -1,2 +1,2 @@
 # Algorithm Practice
-A collection of various algorithms that I've completed
+A collection of various algorithm challenges that I've completed
