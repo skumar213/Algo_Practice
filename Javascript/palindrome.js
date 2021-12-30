@@ -40,11 +40,11 @@ const isPal = str => {
 
 //------------Solution Check------------------
 const inputs = [
-  ["false", "car"],
-  ["true", "racecar"],
-  ["true", "RaCecAr"],
-  ["true", "!? 100 ABCcba 001 ?!"],
-  ["true", ""],
+  [false, "car"],
+  [true, "racecar"],
+  [true, "RaCecAr"],
+  [true, "!? 100 ABCcba 001 ?!"],
+  [true, ""],
 ];
 
 const fn = isPal;
@@ -53,8 +53,21 @@ const solutionCheck = inputs => {
   for (let input of inputs) {
     const answer = input[0];
     const arg1 = input[1];
+    const result = fn(arg1);
 
-    console.log("Answer:", answer, "Result:", fn(arg1));
+    console.log(
+      "Correct?:",
+      answer === result,
+      "|",
+      "Answer:",
+      answer,
+      "|",
+      "Result:",
+      result,
+      "|",
+      "Input1:",
+      arg1
+    );
   }
 };
 

@@ -15,7 +15,7 @@ Time complexity:
 O(N*M) - the function will have to go through the length of the haystack in the for loop and the length of the needle in the nested for loop
 
 Space complexity:
-O(1) - the space used throughout the function is constant
+O(1) - the memory needed doesn't increase based on the size of the input
 
 */
 
@@ -41,10 +41,10 @@ const findIndex = (needle, haystack) => {
 
 //------------Solution Check------------------
 const inputs = [
-  ["7", "or", "hello world"],
-  ["-1", "hello world", "or"],
-  ["-1", "howdy", "hello world"],
-  ["6", "oox", "ooboxooox"],
+  [7, "or", "hello world"],
+  [-1, "hello world", "or"],
+  [-1, "howdy", "hello world"],
+  [6, "oox", "ooboxooox"],
 ];
 
 const fn = findIndex;
@@ -54,8 +54,24 @@ const solutionCheck = inputs => {
     const answer = input[0];
     const arg1 = input[1];
     const arg2 = input[2];
+    const result = fn(arg1, arg2);
 
-    console.log("Answer:", answer, "Result:", fn(arg1, arg2));
+    console.log(
+      "Correct?:",
+      answer === result,
+      "|",
+      "Answer:",
+      answer,
+      "|",
+      "Result:",
+      result,
+      "|",
+      "Input1:",
+      arg1,
+      "|",
+      "Input2:",
+      arg2
+    );
   }
 };
 
