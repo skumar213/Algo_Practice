@@ -14,8 +14,7 @@ Time complexity:
 O(N+M) - have to iterate through all the items in both the nodes
 
 Space complexity:
-O(1) - the memory needed doesn't increase based on the size of the input
-
+O(1) - the memory needed doesn't increase based on the size of the input. You just merge the nodes and don't create any new ones.
 */
 
 //------------Solution------------------
@@ -80,9 +79,9 @@ const solutionCheck = inputs => {
     const answer = input[0];
     const arg1 = input[1];
     const arg2 = input[2];
-    let result = fn(arg1, arg2);
+    const result = fn(arg1, arg2);
 
-    listResult = checkHead(result)
+    const listResult = checkHead(result)
 
     console.log("Answer:", answer, "|", "Result:", listResult);
   }
