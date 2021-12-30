@@ -12,11 +12,12 @@ isPal('') => true
 Solution:
 Check the first and last letter of the string and compare them. If at any point they don't match return false. Return true if it makes it all the way through.
 
-Time complexity: O(n) - we have to atleast loop through n/2
+Time complexity: O(N) - we have to atleast loop through n/2
 Space complexity: O(1) - we create a constant number of new variables for each iteration
 
 */
 
+//------------Solution------------------
 const isPal = str => {
   str = str.toLowerCase();
 

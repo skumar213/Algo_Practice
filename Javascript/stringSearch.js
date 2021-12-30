@@ -11,18 +11,17 @@ indexOf('oox', 'ooboxoooxo'); // should return 6
 Solution:
 Iterate through the haystack while comparing the first letter of the needle. If found, slice the length of the needle and compare. Return the index if true and continue if not. Return -1 if you make it the whole way through.
 
-Time complexity:
+Time complexity: O(N) - the function will have to go through the length of the haystack in the for loop and also in the slice method
 
-
-Space complexity:
+Space complexity: O(N) - the slice method makes a copy of the haystack and worst case it will need to make a full copy of it.
 
 */
 
+//------------Solution------------------
 const findIndex = (needle, haystack) => {
-  for (let i = 0; i < haystack.length; i++) {
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
     if (needle[0] === haystack[i]) {
       const haystackWord = haystack.slice(i, i + needle.length);
-
       if (haystackWord === needle) {
         return i;
       }
@@ -37,7 +36,7 @@ const inputs = [
   ["7", "or", "hello world"],
   ["-1", "hello world", "or"],
   ["-1", "howdy", "hello world"],
-  ["6", "oox", "ooboxoooxo"],
+  ["6", "oox", "ooboxooox"],
 ];
 
 const fn = findIndex;
