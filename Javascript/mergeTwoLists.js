@@ -39,7 +39,6 @@ const mergeTwoLists = (headOne, headTwo) => {
   return head;
 };
 
-
 //------------Solution Check------------------
 class LinkedList {
   constructor(val) {
@@ -58,34 +57,35 @@ function createList(nums) {
   return origHead;
 }
 
-let headone = createList([2,6,7,8]);
-let headtwo = createList([1,3,4,5,9,10]);
+const headone = createList([2, 6, 7, 8]);
+const headtwo = createList([1, 3, 4, 5, 9, 10]);
 
-
-const inputs = [
-  [[1,2,3,4,5,6,7,8,9,10], [2,6,7,8], [1,3,4,5,9,10]],
-];
+const inputs = [[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], headone, headtwo]];
 
 const fn = mergeTwoLists;
+
+function checkHead(head) {
+  const arr = [];
+
+  while (head) {
+    arr.push(head.value);
+    head = head.next;
+  }
+
+  return arr;
+}
 
 const solutionCheck = inputs => {
   for (let input of inputs) {
     const answer = input[0];
     const arg1 = input[1];
     const arg2 = input[2];
-    const result = fn(arg1, arg2);
+    let result = fn(arg1, arg2);
 
-    console.log(
-      "Answer:",
-      answer,
-      "|",
-      "Result:",
-      result,
-      "|",
-    );
+    listResult = checkHead(result)
+
+    console.log("Answer:", answer, "|", "Result:", listResult);
   }
 };
 
 solutionCheck(inputs);
-
-
