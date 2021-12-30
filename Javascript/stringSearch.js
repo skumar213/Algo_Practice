@@ -11,9 +11,11 @@ indexOf('oox', 'ooboxoooxo'); // should return 6
 Solution:
 Iterate through the haystack while comparing the first letter of the needle. If found, slice the length of the needle and compare. Return the index if true and continue if not. Return -1 if you make it the whole way through.
 
-Time complexity: O(N*M) - the function will have to go through the length of the haystack in the for loop and the length of the needle in the nested for loop
+Time complexity:
+O(N*M) - the function will have to go through the length of the haystack in the for loop and the length of the needle in the nested for loop
 
-Space complexity: O(1) - the space used throughout the function is constant
+Space complexity:
+O(1) - the space used throughout the function is constant
 
 */
 
