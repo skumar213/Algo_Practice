@@ -8,13 +8,13 @@ headTwo = 1 -> 3 -> 4 -> 5 -> 9 -> 10 // the head node with value 1
 mergeLinkedLists(headOne, headTwo) = 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 // the new head node with value 1
 
 Solution:
-
+Use pointers to keep track of each node as you compare their values. Iterate until the main pointers value is null and in the process compare values and insert the correct one as the next value of the main pointer.
 
 Time complexity:
-
+O(N+M) - have to iterate through all the items in both the nodes
 
 Space complexity:
-
+O(1) - the memory needed doesn't increase based on the size of the input
 
 */
 
