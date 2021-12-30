@@ -1,8 +1,8 @@
 /*
----Prompt---
+------Prompt------
 Write a function that takes in the heads of N sorted Singly Linked Lists and return the merged list. The merged list should be in sorted order Each Linked List node has an integer value as well as a next node pointing to the next node in the list or to none / null if it is the tail of the list.
 
----Examples---
+------Examples------
 Input =
 [
   1->5->7,
@@ -11,17 +11,17 @@ Input =
 ]
 Output = 1->1->2->3->4->5->6->7->8->8
 
----Solution---
+------Solution------
 Break the problem into two smaller problems, first solve for two lists in a helper function and then solve two at a time in the main function.
 
 For the helper function that find the highest of two nodes: Use pointers to keep track of each node as you compare their values. Assign a variable to the node that starts with a lower value (this also become the main pointer). Then iterate with a while loop until the main pointers next value is null. In the process compare the second nodes value to the next value of the main node. If the second nodes value is less than the main nodes next value, insert the second node as the main node's next property. Once the loop is finished, add the remaining items from the second node to the main nodes next (this is fine since the nodes values are already sorted).
 
 In the main function: loop over the array of nodes and compare two at a time with the helper function. Once the loop is done return the result of the helper function
 
----Time complexity---
+------Time complexity------
 O(N * (N+M)) - mergeNLists for loop has a O(N) since it has to go through all the head nodes. And the mergeTwoLists is called on each pair has a O(N+M) since it has to go through all the items in both input nodes
 
----Space complexity---
+------Space complexity------
 O(1) - the memory needed doesn't increase based on the size of the input. You just merge the nodes and don't create any new ones.
 
 */
