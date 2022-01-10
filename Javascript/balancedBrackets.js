@@ -20,7 +20,6 @@ O(N) - have to iterate through the entire string in the for loop. Match is also 
 
 ------Space complexity------
 O(N) - The stack could end up being the same size as the input
-
 */
 
 //------------Solution------------------
