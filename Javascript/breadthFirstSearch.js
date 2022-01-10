@@ -29,7 +29,7 @@ DFSPre
 Process the current node first and then recursively call the same function on its children
 
 DFSPost
-Recursively call the function on the nodes children, then process the node.
+Recursively call the same function on the nodes children, then process the node.
 
 ------Time complexity------
 BFS
