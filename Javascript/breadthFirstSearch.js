@@ -21,12 +21,6 @@ BFS(node-a, callback) -> A, B, C, D, E, F, G
 DFSPre(node-a, callback) -> A, B, D, E, C, F, G
 DFSPost(node-a, callback) -> D, E, B, F, G, C, A
 
-[a,c, b,e,d]
-
-[a,c,b,e,d]
-
-
-abc
 ------Solution------
 
 
@@ -57,38 +51,22 @@ const BFS = (node, callback) => {
   }
 }
 
+
 const DFSPre = (node, callback) => {
-  const stack = [node];
+  callback(node.value)
 
-  while(stack.length > 0) {
-    const currentNode = stack.pop();
-
-    callback(currentNode.value);
-
-    for (let i = currentNode.children.length - 1; i >= 0 ; i--) {
-      stack.push(currentNode.children[i])
-    }
+  for (let child of node.children) {
+    DFSPre(child, callback)
   }
+
 }
 
 const DFSPost = (node, callback) => {
-  const queue = [node];
-
-  const visited = [];
-
-  while (queue.length > 0) {
-    const currentNode = queue.pop();
-    visited.push(currentNode.value)
-
-    if (currentNode.children.length === 0 && visited.includes(currentNode.value)) {
-      callback(currentNode)
-    }
-
-
-    currentNode.children.forEach(n => queue.unshift(n))
-    queue.push(currentNode);
-
+  for (let child of node.children) {
+    DFSPost(child, callback)
   }
+
+  callback(node.value)
 }
 
 
@@ -127,8 +105,8 @@ const solutionCheck = input => {
 };
 
 // BFS(a, solutionCheck)
-// DFSPre(a, solutionCheck);
-DFSPost(a, solutionCheck);
+DFSPre(a, solutionCheck);
+// DFSPost(a, solutionCheck);
 
 
 
