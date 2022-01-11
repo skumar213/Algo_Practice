@@ -38,50 +38,91 @@ O() -
 */
 
 //------------Solution------------------
-const rowHelper = (matrix, row, column, history) => {
+const history = [];
+
+const counter = (matrix, row, column) => {
   let count = 0;
 
-  //row-forward
-  if (matrix[row][column+1] === 1) {
-    count++;
+  history.push(`${row}${column}`);
 
-    count += rowHelper(matrix[row][column+1])
+  console.log(row,column)
+
+
+  if ((column + 1) < matrix[row].length && (column - 1) >= 0) {
+    //row-forward
+    if (matrix[row][column + 1] === 1) {
+      count++;
+
+      count += counter(matrix,row,column + 1);
+    }
+
+    //row-back
+    // if (matrix[row][column - 1] === 1) {
+    //   count++;
+
+    //   count += counter(matrix,row,column - 1);
+    // }
+
   }
 
-  //row-back
-  if (matrix[row][column+1] === 1) {
-    count++;
+  if (row + 1 < matrix.length) {
+    //column-down
+    if (matrix[row + 1][column] === 1) {
+      count++;
 
-    count += rowHelper(matrix[row][column+1])
-  }
-
-  //column-down
-  if (matrix[row+1][column] === 1) {
-    count++;
-
-    count += rowHelper(matrix[row+1][column])
+      count += counter(matrix,row + 1,column);
+    }
   }
 
   return count;
-}
+};
 
-
-
-
-
-const riverSizes = (matrix, row=0, column=0) => {
+const riverSizes = matrix => {
   const result = [];
-  const history = [];
 
   for (let row = 0; row < matrix.length; row++) {
-    for (let column = 0; j < matrix[row].length; column++) {
+    for (let column = 0; column < matrix[row].length; column++) {
       const cell = matrix[row][column];
       let count = 0;
 
-      if (cell === 1) {
+
+      if (cell === 1 && !history.includes(`${row}${column}`)) {
         count++;
 
-        //check rest of row-forward
+        count += counter(matrix, row, column);
+
+        result.push(count);
+      }
+    }
+  }
+
+  return result;
+};
+
+//------------Solution Check------------------
+const matrix1 = [
+  [1, 0, 1, 0],
+  [0, 1, 1, 1],
+  [1, 0, 0, 1]
+]
+
+
+const matrix2 = [
+  [1, 0, 0, 1, 0],
+  [1, 0, 1, 1, 0],
+  [0, 0, 1, 0, 1],
+  [1, 0, 1, 0, 1],
+  [1, 0, 1, 1, 0]
+]
+
+
+
+console.log(riverSizes(matrix1));
+// console.log(riverSizes(matrix2))
+
+/*
+
+//check rest of row-forward
         for (let s = column + 1; s < matrix[row].length; s++) {
           if (matrix[row][s] === 1) {
             count++
@@ -109,35 +150,4 @@ const riverSizes = (matrix, row=0, column=0) => {
         }
 
 
-      }
-
-
-
-    }
-  }
-}
-
-
-
-
-//------------Solution Check------------------
-const inputs = [
-  [false, "[][(){}"],
-  [false, "({)}"],
-  [true, "({[]})"],
-  [true, "text ( is allowed ){rwwrwrrww [] ()}"],
-];
-
-const fn = hasBalancedBrackets;
-
-const solutionCheck = inputs => {
-  for (let input of inputs) {
-    const answer = input[0];
-    const arg1 = input[1];
-    const result = fn(arg1);
-
-    console.log("Answer:", answer, "|", "Result:", result);
-  }
-};
-
-solutionCheck(inputs);
+*/
