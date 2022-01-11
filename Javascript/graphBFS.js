@@ -38,30 +38,27 @@ O() -
 */
 
 //------------Solution------------------
-const history = [];
 
-const counter = (matrix, row, column) => {
+
+const counter = (matrix, row, column, history) => {
   let count = 0;
 
   history.push(`${row}${column}`);
 
-  console.log(row,column)
-
-
   if ((column + 1) < matrix[row].length && (column - 1) >= 0) {
     //row-forward
-    if (matrix[row][column + 1] === 1) {
+    if (matrix[row][column + 1] === 1 && !history.includes(`${row}${column +1}`)) {
       count++;
 
-      count += counter(matrix,row,column + 1);
+      count += counter(matrix,row,column + 1, history);
     }
 
     //row-back
-    // if (matrix[row][column - 1] === 1) {
-    //   count++;
+    if (matrix[row][column - 1] === 1 && !history.includes(`${row}${column -1}`)) {
+      count++;
 
-    //   count += counter(matrix,row,column - 1);
-    // }
+      count += counter(matrix,row,column - 1, history);
+    }
 
   }
 
@@ -70,14 +67,18 @@ const counter = (matrix, row, column) => {
     if (matrix[row + 1][column] === 1) {
       count++;
 
-      count += counter(matrix,row + 1,column);
+      count += counter(matrix,row + 1,column, history);
     }
   }
 
   return count;
 };
 
+
+
+
 const riverSizes = matrix => {
+  const history = [];
   const result = [];
 
   for (let row = 0; row < matrix.length; row++) {
@@ -89,7 +90,7 @@ const riverSizes = matrix => {
       if (cell === 1 && !history.includes(`${row}${column}`)) {
         count++;
 
-        count += counter(matrix, row, column);
+        count += counter(matrix, row, column, history);
 
         result.push(count);
       }
@@ -109,7 +110,7 @@ const matrix1 = [
 
 const matrix2 = [
   [1, 0, 0, 1, 0],
-  [1, 0, 1, 1, 0],
+  [1, 0, 1, 0, 0],
   [0, 0, 1, 0, 1],
   [1, 0, 1, 0, 1],
   [1, 0, 1, 1, 0]
@@ -117,37 +118,5 @@ const matrix2 = [
 
 
 
-console.log(riverSizes(matrix1));
-// console.log(riverSizes(matrix2))
-
-/*
-
-//check rest of row-forward
-        for (let s = column + 1; s < matrix[row].length; s++) {
-          if (matrix[row][s] === 1) {
-            count++
-          } else {
-            break
-          }
-        }
-
-        //check rest of row-back
-        for (let s = column - 1; s >= 0; s--) {
-          if (matrix[row][s] === 1) {
-            count++
-          } else {
-            break
-          }
-        }
-
-        //check rest of column-down
-        for (let k = row + 1; s < matrix.length; k++) {
-          if (matrix[k][column] === 1) {
-            count++
-          } else {
-            break
-          }
-        }
-
-
-*/
+console.log(riverSizes(matrix1).sort((a,b)=>a-b)); //[1,1,5]
+console.log(riverSizes(matrix2).sort((a,b)=>a-b)); //[1,2,2,2,5]
