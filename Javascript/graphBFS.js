@@ -38,7 +38,7 @@ Will also use a history variable (an array), that will be passed to each new fun
 O(N * M) - We have to visit each cell in the matrix. The outer array has length N and then inner array has length M.
 
 ------Space complexity------
-O(N) - We have to keep track of all the cells that were visited in the history array
+O(N) - We have to keep track of all the cells that were visited in the history array and the call stack from calling the function recursively will also take up space
 */
 
 //------------Solution------------------
