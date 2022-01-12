@@ -24,50 +24,58 @@ pathFinder(graph, 'b', 'a') -> false
 
 
 ------Solution------
--loop through object
-  -push current item to history array to keep track
-  -check if items in array are the target
-    -if yes, return true
-    -if no, recursively call the function with the current letter as the start
+Will use depth first search to traverse the graph. The function will loop through the graph and will check if the associated array of the start point has the target. If it does, it will return true. If not, it will recursively call itself with with the currently selected vertex as the new start point. If any of the recursive calls return true, the function will return true. Otherwise if its gone through the entire array of the original start point it will return false.
+
+Also use an array to keep track of the visited verticies.
 
 ------Time complexity------
-O() -
+O(N * M) - Have to go through each key and also its associated array.
+
 
 ------Space complexity------
-O() -
+O(N * M) - Keeping track of the visited vertices in the history variable and the recusive calls will take up space.
 */
 
 //------------Solution------------------
-const pathFinder = (graph, start, target, history=[]) => {
+const pathFinder = (graph, start, target, history = []) => {
   if (graph[start] && !history.includes(start)) {
-    history.push(start)
+    //N
+    history.push(start);
 
     for (let vertex of graph[start]) {
+      //N
       if (vertex === target) {
         return true;
       }
 
       if (graph[start] && pathFinder(graph, vertex, target, history)) {
-        return true
+        //M
+        return true;
       }
     }
-
   }
 
-  return false
-}
-
-
-
+  return false;
+};
 
 //------------Solution Check------------------
-const graph = {
-  a: ['b'],
-  b: ['c', 'd'],
-  c: ['d']
-}
+const graph1 = {
+  a: ["b"],
+  b: ["c", "d"],
+  c: ["d"],
+};
 
+console.log(pathFinder(graph1, "a", "d")); //true
+console.log(pathFinder(graph1, "b", "a")); //false
 
+const graph2 = {
+  a: ["b"],
+  b: ["c", "d"],
+  c: ["d"],
+  d: [],
+};
 
-console.log(pathFinder(graph, 'a', 'd'))
-// console.log(pathFinder(graph, 'b', 'a'))
+console.log(pathFinder(graph2, "a", "b")); //true
+console.log(pathFinder(graph2, "b", "a")); //false
+console.log(pathFinder(graph2, "a", "d")); //true
+console.log(pathFinder(graph2, "a", "a")); //false
