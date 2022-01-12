@@ -26,7 +26,7 @@ pathFinder(graph, 'b', 'a') -> false
 ------Solution------
 Will use depth first search to traverse the graph. The function will loop through the graph and will check if the associated array of the start point has the target. If it does, it will return true. If not, it will recursively call itself with with the currently selected vertex as the new start point. If any of the recursive calls return true, the function will return true. Otherwise if its gone through the entire array of the original start point it will return false.
 
-Also use an array to keep track of the visited verticies.
+Also use an object to keep track of the visited verticies.
 
 ------Time complexity------
 O(N * M) - Have to go through each key and also its associated array.
@@ -37,19 +37,16 @@ O(N * M) - Keeping track of the visited vertices in the history variable and the
 */
 
 //------------Solution------------------
-const pathFinder = (graph, start, target, history = []) => {
-  if (graph[start] && !history.includes(start)) {
-    //N
-    history.push(start);
+const pathFinder = (graph, start, target, history = {}) => {
+  if (graph[start] && !history[start]) {
+    history[start] = true;
 
     for (let vertex of graph[start]) {
-      //N
       if (vertex === target) {
         return true;
       }
 
       if (graph[start] && pathFinder(graph, vertex, target, history)) {
-        //M
         return true;
       }
     }
