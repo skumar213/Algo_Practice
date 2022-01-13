@@ -6,37 +6,46 @@ The array that is returned should only contain unique values and its elements sh
 
 ------Examples------
 stringPerm('one') -> [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-3-6, 2-2
 
 one, neo, oen
 noe, eno
 eon
 
+one
+oen
+noe
+neo
+eon
+eno
 
-ab, ba
+fish, ishf, shfi, hfis
+ifsh, fshi, shif, hifs
+sifh, ifhs, fhsi, hsif
+hisf, isfh, sfhi, fhis
 
-[
-  'fhis', 'fhsi', 'fihs',
-  'fish', 'fshi', 'fsih',
-  'hfis', 'hfsi', 'hifs',
-  'hisf', 'hsfi', 'hsif',
-  'ifhs', 'ifsh', 'ihfs',
-  'ihsf', 'isfh', 'ishf',
-  'sfhi', 'sfih', 'shfi',
-  'shif', 'sifh', 'sihf'
-]
+fish
+fihs
+fshi
+fsih
+fhis
+fhsi
+----
 
-need to go through it 16 (n^n) times
-but only 12 (n^(n-1)) are correct
+fish
 
-2 and less are different
+fihs
+
+fshi
+fsih
+
+fhis
+fhsi
+
+
 
 
 ------Solution------
-
--Take current string and push it array (making sure its not already there)
--call the function again but change the letters as the input
-
+-Take full word and check by recursivley checking if the first 3 letters are still what are the option, then 2, then 1
 
 
 
@@ -45,40 +54,44 @@ O() -
 
 ------Space complexity------
 O() -
-*/
 
+
+
+
+one
+
+*/
 //------------Solution------------------
 
-//Iterative solution
-const stringPermIter = (word) => {
-  const history = {};
-  let count = 0
+
+const stringPerm = (word) => {
+  results = [];
 
   for (let i = 0; i < word.length; i++) {
-    for (let j = 0; j < word.length; j++) {
-      if (!history[word]) {
-        history[word] = true
-      }
+    if (i === 0) {
+      result.push(word[i])
+    } else {
+      results.map((num, index) => {
+        if (index = word.length - 1) {
+          return num + word[i]
+        } else {
+          return word[i] + num
+        }
 
-      word = word.slice(1) + word[0]
 
-      if (j === word.length - 1 && count !== word.length - 1) {
-        const wordArr = word.split("");
-
-        wordArr[count] = word[count + 1];
-        wordArr[count + 1] = word[count]
-
-        word = wordArr.join('')
-
-        count++
-      }
+      })
     }
+
+
+
+
+
   }
 
-  return Object.keys(history).sort()
+
 }
 
-//Recursive solution
+
 
 
 
@@ -86,7 +99,7 @@ const stringPermIter = (word) => {
 //------------Solution Check------------------
 
 //Iterative Check
-// console.log(stringPermIter('fish'))
+console.log(stringPerm('fish'))
 /*[
   'fhis', 'fhsi', 'fihs',
   'fish', 'fshi', 'fsih',
@@ -97,10 +110,10 @@ const stringPermIter = (word) => {
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-// console.log(stringPermIter('one'))
+// console.log(stringPerm('one'))
 // // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-// console.log(stringPermIter('app'))
+// console.log(stringPerm('app'))
 // // [ 'app','pap','ppa']
-// console.log(stringPermIter('aa'))
+// console.log(stringPerm('aa'))
 // // ['aa']
 
