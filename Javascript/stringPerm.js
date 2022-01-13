@@ -7,40 +7,11 @@ The array that is returned should only contain unique values and its elements sh
 ------Examples------
 stringPerm('one') -> [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
 
-one, neo, oen
-noe, eno
-eon
 
-one
-oen
-noe
-neo
-eon
-eno
-
-fish, ishf, shfi, hfis
-ifsh, fshi, shif, hifs
-sifh, ifhs, fhsi, hsif
-hisf, isfh, sfhi, fhis
-
-fish
-fihs
-fshi
-fsih
-fhis
-fhsi
-----
-
-fish
-
-fihs
-
-fshi
-fsih
-
-fhis
-fhsi
-
+NEXT STEPS
+1) Do recursive version
+2) Fill out top, splits complexity between recursive and iterative
+3) Understand what they did
 
 
 
@@ -63,44 +34,46 @@ one
 */
 //------------Solution------------------
 
-
-const stringPerm = (word) => {
+const stringPerm = word => {
   let results = [];
 
+  //goes through word once
   for (let i = 0; i < word.length; i++) {
     if (i === 0) {
-      results.push(word[i])
+      //if first letter push it up to results
+      results.push(word[i]);
     } else {
       const tmpResults = [];
 
-      while(results.length) {
+      //loops through each current word in resutls
+      while (results.length) {
         const currentWord = results.pop();
 
-
+        //loops through each letter of the current word and puts the current letter (from the main word) behind the second half of the word, attaches it in order and then pushes it back to results
         for (let j = 0; j < currentWord.length; j++) {
-          const firstHalf = currentWord.slice(0, j)
-          const secondHalf = currentWord.slice(j)
+          const firstHalf = currentWord.slice(0, j);
+          const secondHalf = currentWord.slice(j);
 
-          const newWord = firstHalf + word[i] + secondHalf
+          const newWord = firstHalf + word[i] + secondHalf;
 
-
-
-          tmpResults.push(newWord)
+          tmpResults.push(newWord);
 
           if (j === currentWord.length - 1) {
-            tmpResults.push(firstHalf + secondHalf + word[i])
+            tmpResults.push(firstHalf + secondHalf + word[i]);
           }
         }
-
       }
 
-      results = tmpResults
+      results = tmpResults;
     }
   }
 
-  return results.sort()
-}
+  return results.sort();
+};
 
+const stringPerm1 = word => {
+
+}
 
 
 
@@ -109,7 +82,7 @@ const stringPerm = (word) => {
 //------------Solution Check------------------
 
 //Iterative Check
-console.log(stringPerm('fish'))
+console.log(stringPerm("fish"));
 /*[
   'fhis', 'fhsi', 'fihs',
   'fish', 'fshi', 'fsih',
@@ -126,4 +99,3 @@ console.log(stringPerm('fish'))
 // // [ 'app','pap','ppa']
 // console.log(stringPerm('aa'))
 // // ['aa']
-
