@@ -65,30 +65,40 @@ one
 
 
 const stringPerm = (word) => {
-  results = [];
+  let results = [];
 
   for (let i = 0; i < word.length; i++) {
     if (i === 0) {
-      result.push(word[i])
+      results.push(word[i])
     } else {
-      results.map((num, index) => {
-        if (index = word.length - 1) {
-          return num + word[i]
-        } else {
-          return word[i] + num
+      const tmpResults = [];
+
+      while(results.length) {
+        const currentWord = results.pop();
+
+
+        for (let j = 0; j < currentWord.length; j++) {
+          const firstHalf = currentWord.slice(0, j)
+          const secondHalf = currentWord.slice(j)
+
+          const newWord = firstHalf + word[i] + secondHalf
+
+
+
+          tmpResults.push(newWord)
+
+          if (j === currentWord.length - 1) {
+            tmpResults.push(firstHalf + secondHalf + word[i])
+          }
         }
 
+      }
 
-      })
+      results = tmpResults
     }
-
-
-
-
-
   }
 
-
+  return results.sort()
 }
 
 
