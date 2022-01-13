@@ -32,13 +32,13 @@ The function riverSizes is the main function that will iterate through all the i
 
 The function checkAround will check the spaces forward, back, and down from the original spot to see if a 1 is there. If it finds a 1, it will recursively call itself with the next spot over, in its respective direction, as its inputs. The result of all the recursive calls will be added to the total count.
 
-Will also use a history variable (an array), that will be passed to each new function call to keep track of which cells we've been to.
+Will also use a history variable (an object), that will be passed to each new function call to keep track of which cells we've been to.
 
 ------Time complexity------
 O(N * M) - We have to visit each cell in the matrix. The outer array has length N and then inner array has length M.
 
 ------Space complexity------
-O(N * M) - We have to keep track of all the cells that were visited in the history array and the call stack from calling the function recursively will also take up space
+O(N * M) - We have to keep track of all the cells that were visited in the history object and the call stack from calling the function recursively will also take up space
 */
 
 //------------Solution------------------
@@ -46,13 +46,14 @@ O(N * M) - We have to keep track of all the cells that were visited in the histo
 const checkAround = (matrix, row, column, history) => {
   let count = 0;
 
-  history.push(`${row}${column}`);
+
+  history[`${row}${column}`] = true;
 
   if (column + 1 < matrix[row].length && column - 1 >= 0) {
     //row-forward
     if (
       matrix[row][column + 1] === 1 &&
-      !history.includes(`${row}${column + 1}`)
+      !history[`${row}${column + 1}`]
     ) {
       count++;
 
@@ -62,7 +63,7 @@ const checkAround = (matrix, row, column, history) => {
     //row-back
     if (
       matrix[row][column - 1] === 1 &&
-      !history.includes(`${row}${column - 1}`)
+      !history[`${row}${column - 1}`]
     ) {
       count++;
 
@@ -83,7 +84,7 @@ const checkAround = (matrix, row, column, history) => {
 };
 
 const riverSizes = matrix => {
-  const history = [];
+  const history = {};
   const result = [];
 
   for (let row = 0; row < matrix.length; row++) {
@@ -91,7 +92,7 @@ const riverSizes = matrix => {
       const cell = matrix[row][column];
       let count = 0;
 
-      if (cell === 1 && !history.includes(`${row}${column}`)) {
+      if (cell === 1 && !history[`${row}${column}`]) {
         count++;
 
         count += checkAround(matrix, row, column, history);
