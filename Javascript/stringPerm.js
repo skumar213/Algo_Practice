@@ -56,11 +56,15 @@ const stringPerm = word => {
 
           const newWord = firstHalf + word[i] + secondHalf;
 
-          tmpResults.push(newWord);
+          if (!tmpResults.includes(newWord)) {
+            tmpResults.push(newWord);
 
-          if (j === currentWord.length - 1) {
+          }
+
+          if (j === currentWord.length - 1 && !tmpResults.includes(firstHalf + secondHalf + word[i])) {
             tmpResults.push(firstHalf + secondHalf + word[i]);
           }
+
         }
       }
 
@@ -71,9 +75,6 @@ const stringPerm = word => {
   return results.sort();
 };
 
-const stringPerm1 = word => {
-
-}
 
 
 
@@ -93,9 +94,9 @@ console.log(stringPerm("fish"));
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-// console.log(stringPerm('one'))
+console.log(stringPerm('one'))
 // // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-// console.log(stringPerm('app'))
+console.log(stringPerm('app'))
 // // [ 'app','pap','ppa']
-// console.log(stringPerm('aa'))
+console.log(stringPerm('aa'))
 // // ['aa']
