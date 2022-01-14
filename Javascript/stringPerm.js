@@ -8,12 +8,6 @@ The array that is returned should only contain unique values and its elements sh
 stringPerm('one') -> [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
 
 
-NEXT STEPS
-1) Do recursive version
-2) Fill out top, splits complexity between recursive and iterative
-3) Understand what they did
-
-
 
 ------Solution------
 -Take full word and check by recursivley checking if the first 3 letters are still what are the option, then 2, then 1
@@ -34,7 +28,7 @@ one
 */
 //------------Solution------------------
 
-const stringPerm = word => {
+const stringPerm1 = word => {
   let results = [];
 
   //goes through word once
@@ -45,7 +39,7 @@ const stringPerm = word => {
     } else {
       const tmpResults = [];
 
-      //loops through each current word in resutls
+      //loops through each current word in results array
       while (results.length) {
         const currentWord = results.pop();
 
@@ -58,27 +52,75 @@ const stringPerm = word => {
 
           if (!tmpResults.includes(newWord)) {
             tmpResults.push(newWord);
-
           }
 
-          if (j === currentWord.length - 1 && !tmpResults.includes(firstHalf + secondHalf + word[i])) {
+          if (
+            j === currentWord.length - 1 &&
+            !tmpResults.includes(firstHalf + secondHalf + word[i])
+          ) {
             tmpResults.push(firstHalf + secondHalf + word[i]);
           }
-
         }
       }
 
-      results = tmpResults;
+      results.push(...tmpResults);
     }
   }
 
   return results.sort();
 };
 
+const stringPerm = word => {
+  let results = [word[0]];
+
+  function getWords(word, tmpResults = []) {
+    if (!results.length) {
+      results.push(...tmpResults);
+      tmpResults.splice(0)
+      return;
+    } else {
+      for (let i = 0; i < word.length; i++) {
+        // console.log("top",word, results)
+
+        if (results.length === 1 && results[0] === word[0] && i === 0) {
+          continue;
+        }
+
+        const currentWord = results.pop();
 
 
+        for (let j = 0; j < currentWord.length; j++) {
+          const firstHalf = currentWord.slice(0, j);
+          const secondHalf = currentWord.slice(j);
+
+          const newWord = firstHalf + word[i] + secondHalf;
+
+          if (!tmpResults.includes(newWord)) {
+            tmpResults.push(newWord);
+          }
+
+          if (
+            j === currentWord.length - 1 &&
+            !tmpResults.includes(firstHalf + secondHalf + word[i])
+          ) {
+            tmpResults.push(firstHalf + secondHalf + word[i]);
+          }
+        }
+
+        const currentLetter = word.slice(i, i+1)
+        // console.log("bottom",currentWord, currentLetter, results, tmpResults)
+
+        getWords(currentLetter, tmpResults);
+      }
+    }
+  }
 
 
+  getWords(word);
+  return results.sort();
+
+
+};
 
 //------------Solution Check------------------
 
@@ -94,9 +136,9 @@ console.log(stringPerm("fish"));
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-console.log(stringPerm('one'))
+console.log(stringPerm("one"));
 // // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-console.log(stringPerm('app'))
+console.log(stringPerm("app"));
 // // [ 'app','pap','ppa']
-console.log(stringPerm('aa'))
+console.log(stringPerm("aa"));
 // // ['aa']
