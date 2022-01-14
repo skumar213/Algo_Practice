@@ -6,26 +6,30 @@ The array that is returned should only contain unique values and its elements sh
 
 ------Examples------
 stringPerm('one') -> [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
+stringPerm('app') -> [ 'app','pap','ppa']
+stringPerm('aa') -> ['aa']
 
 
 
 ------Solution------
--Take full word and check by recursivley checking if the first 3 letters are still what are the option, then 2, then 1
+Iterative
+Loop through the word and add the current letter to the front and back of each item in the results array. A temporary array (tmpResults) will keep track of the items as they are being changed and then it will be added to the final results array. The while loop will keep taking items that are currently in the results array and adding the current letter to the front and back of each character until it has gone through the entire word.
 
+Recursive
+Use a second function to take the previous most item in the results array and add the first letter of the word to the front and back of each character. If the results array still has items in it, it will call the same function again recursively but with the currentLetter added back to the word so it can keep adding it to the items in the results array. If the results array is empty, it will transfer all the items from the tmp array into the results array and then call itself with the original word minus the first letter. Once the word is empty and all the permutations are added to the results array, the function will return (base case).
 
 
 ------Time complexity------
-O() -
+Iterative and Recursive
+O(N!) - You have to go through all the permutations
+
 
 ------Space complexity------
-O() -
-
-
-
-
-one
+Iterative and Recursive
+O(N!) - You have to store all the permutations in an array
 
 */
+
 //------------Solution------------------
 //Iterative solution
 const iterStringPerm = word => {
@@ -64,22 +68,19 @@ const iterStringPerm = word => {
 
 //Recursive solution
 const recStringPerm = word => {
-  word = word.split("")
+  word = word.split("");
   let results = [word.shift()];
 
   function getWords(word, tmpResults = []) {
-    if (!results.length) {
-      results.push(...tmpResults);
-      tmpResults.splice(0);
-    }
-
+    //if word length is zero, means we're done and can return. base case
     if (!word.length) {
-      return
+      return;
     }
 
     const currentWord = results.pop();
     const currentLetter = word.shift();
 
+    //loops through each letter of the current word and puts the current letter (from the main word) behind and in front of each letter in the currentWord
     for (let j = 0; j <= currentWord.length; j++) {
       let wordCopy = currentWord.split("");
       wordCopy.splice(j, 0, currentLetter);
@@ -91,13 +92,14 @@ const recStringPerm = word => {
     }
 
     if (results.length) {
-      word.unshift(currentLetter)
+      word.unshift(currentLetter);
       getWords(word, tmpResults);
     } else {
-      getWords(word, tmpResults)
+      results.push(...tmpResults);
+      tmpResults.splice(0);
+
+      getWords(word, tmpResults);
     }
-
-
   }
 
   getWords(word);
