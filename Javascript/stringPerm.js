@@ -28,7 +28,7 @@ one
 */
 //------------Solution------------------
 //Iterative solution
-const IterStringPerm = word => {
+const iterStringPerm = word => {
   let results = [];
 
   //goes through word once
@@ -43,22 +43,14 @@ const IterStringPerm = word => {
       while (results.length) {
         const currentWord = results.pop();
 
-        //loops through each letter of the current word and puts the current letter (from the main word) behind the second half of the word, attaches it in order and then pushes it back to results
-        for (let j = 0; j < currentWord.length; j++) {
-          const firstHalf = currentWord.slice(0, j);
-          const secondHalf = currentWord.slice(j);
+        //loops through each letter of the current word and puts the current letter (from the main word) behind and in front of each letter in the currentWord
+        for (let j = 0; j <= currentWord.length; j++) {
+          let wordCopy = currentWord.split("");
+          wordCopy.splice(j, 0, word[i]);
+          wordCopy = wordCopy.join("");
 
-          const newWord = firstHalf + word[i] + secondHalf;
-
-          if (!tmpResults.includes(newWord)) {
-            tmpResults.push(newWord);
-          }
-
-          if (
-            j === currentWord.length - 1 &&
-            !tmpResults.includes(firstHalf + secondHalf + word[i])
-          ) {
-            tmpResults.push(firstHalf + secondHalf + word[i]);
+          if (!tmpResults.includes(wordCopy)) {
+            tmpResults.push(wordCopy);
           }
         }
       }
@@ -72,61 +64,50 @@ const IterStringPerm = word => {
 
 //Recursive solution
 const recStringPerm = word => {
-  let results = [word[0]];
+  word = word.split("")
+  let results = [word.shift()];
 
   function getWords(word, tmpResults = []) {
     if (!results.length) {
       results.push(...tmpResults);
-      tmpResults.splice(0)
-      return;
-    } else {
-      for (let i = 0; i < word.length; i++) {
-        // console.log("top",word, results)
+      tmpResults.splice(0);
+    }
 
-        if (results.length === 1 && results[0] === word[0] && i === 0) {
-          continue;
-        }
+    if (!word.length) {
+      return
+    }
 
-        const currentWord = results.pop();
+    const currentWord = results.pop();
+    const currentLetter = word.shift();
 
+    for (let j = 0; j <= currentWord.length; j++) {
+      let wordCopy = currentWord.split("");
+      wordCopy.splice(j, 0, currentLetter);
+      wordCopy = wordCopy.join("");
 
-        for (let j = 0; j < currentWord.length; j++) {
-          const firstHalf = currentWord.slice(0, j);
-          const secondHalf = currentWord.slice(j);
-
-          const newWord = firstHalf + word[i] + secondHalf;
-
-          if (!tmpResults.includes(newWord)) {
-            tmpResults.push(newWord);
-          }
-
-          if (
-            j === currentWord.length - 1 &&
-            !tmpResults.includes(firstHalf + secondHalf + word[i])
-          ) {
-            tmpResults.push(firstHalf + secondHalf + word[i]);
-          }
-        }
-
-        const currentLetter = word.slice(i, i+1)
-        // console.log("bottom",currentWord, currentLetter, results, tmpResults)
-
-        getWords(currentLetter, tmpResults);
+      if (!tmpResults.includes(wordCopy)) {
+        tmpResults.push(wordCopy);
       }
     }
-  }
 
+    if (results.length) {
+      word.unshift(currentLetter)
+      getWords(word, tmpResults);
+    } else {
+      getWords(word, tmpResults)
+    }
+
+
+  }
 
   getWords(word);
   return results.sort();
-
-
 };
 
 //------------Solution Check------------------
 
 //Iterative Check
-console.log(IterStringPerm("fish"));
+console.log(iterStringPerm("fish"));
 /*[
   'fhis', 'fhsi', 'fihs',
   'fish', 'fshi', 'fsih',
@@ -137,14 +118,12 @@ console.log(IterStringPerm("fish"));
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-console.log(IterStringPerm("one"));
-// // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-console.log(IterStringPerm("app"));
-// // [ 'app','pap','ppa']
-console.log(IterStringPerm("aa"));
-// // ['aa']
-
-
+console.log(iterStringPerm("one"));
+// [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
+console.log(iterStringPerm("app"));
+// [ 'app','pap','ppa']
+console.log(iterStringPerm("aa"));
+// ['aa']
 
 //Recursive Check
 console.log(recStringPerm("fish"));
@@ -159,8 +138,8 @@ console.log(recStringPerm("fish"));
   'shif', 'sifh', 'sihf'
 ]*/
 console.log(recStringPerm("one"));
-// // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
+// [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
 console.log(recStringPerm("app"));
-// // [ 'app','pap','ppa']
+// [ 'app','pap','ppa']
 console.log(recStringPerm("aa"));
-// // ['aa']
+// ['aa']
