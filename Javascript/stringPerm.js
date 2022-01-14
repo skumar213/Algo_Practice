@@ -28,7 +28,7 @@ one
 */
 //------------Solution------------------
 //Iterative solution
-const stringPermIter = word => {
+const IterStringPerm = word => {
   let results = [];
 
   //goes through word once
@@ -71,7 +71,7 @@ const stringPermIter = word => {
 };
 
 //Recursive solution
-const stringPermRec = word => {
+const recStringPerm = word => {
   let results = [word[0]];
 
   function getWords(word, tmpResults = []) {
@@ -126,7 +126,7 @@ const stringPermRec = word => {
 //------------Solution Check------------------
 
 //Iterative Check
-console.log(stringPermIter("fish"));
+console.log(IterStringPerm("fish"));
 /*[
   'fhis', 'fhsi', 'fihs',
   'fish', 'fshi', 'fsih',
@@ -137,17 +137,17 @@ console.log(stringPermIter("fish"));
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-console.log(stringPermIter("one"));
+console.log(IterStringPerm("one"));
 // // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-console.log(stringPermIter("app"));
+console.log(IterStringPerm("app"));
 // // [ 'app','pap','ppa']
-console.log(stringPermIter("aa"));
+console.log(IterStringPerm("aa"));
 // // ['aa']
 
 
 
 //Recursive Check
-console.log(stringPermRec("fish"));
+console.log(recStringPerm("fish"));
 /*[
   'fhis', 'fhsi', 'fihs',
   'fish', 'fshi', 'fsih',
@@ -158,9 +158,9 @@ console.log(stringPermRec("fish"));
   'sfhi', 'sfih', 'shfi',
   'shif', 'sifh', 'sihf'
 ]*/
-console.log(stringPermRec("one"));
+console.log(recStringPerm("one"));
 // // [ 'eno', 'eon' 'neo', 'noe', 'oen', 'one']
-console.log(stringPermRec("app"));
+console.log(recStringPerm("app"));
 // // [ 'app','pap','ppa']
-console.log(stringPermRec("aa"));
+console.log(recStringPerm("aa"));
 // // ['aa']
