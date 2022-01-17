@@ -33,58 +33,74 @@ O() -
 */
 
 //------------Solution------------------
-const deepestNode = (node) => {
+const deepestNode = node => {
   let deepestNode;
-  let deepestCount;
+  let deepestCount = 0;
   let counter = 0;
 
-  function findDeepest(node, counter) {
+  function findDeepest(node) {
     counter++;
 
     if (!node.left && !node.right) {
-      deepest = node;
-      deepestCount = counter;
-
-      counter = 0
+      if (counter > deepestCount) {
+        deepestNode = node;
+        deepestCount = counter;
+      }
     }
 
-    if (node.left){
-      findDeepest(node.left)
+    if (node.left) {
+      findDeepest(node.left);
     }
 
     if (node.right) {
-      findDeepest(node.right)
+      findDeepest(node.right);
     }
+
+    counter--;
   }
 
-  deepestNode(node)
-  return deepestNode.val
-}
-
-
-
-
-
-
-
-//------------Solution Check------------------
-const inputs = [
-  [false, "[][(){}"],
-  [false, "({)}"],
-  [true, "({[]})"],
-  [true, "text ( is allowed ){rwwrwrrww [] ()}"],
-];
-
-const fn = hasBalancedBrackets;
-
-const solutionCheck = inputs => {
-  for (let input of inputs) {
-    const answer = input[0];
-    const arg1 = input[1];
-    const result = fn(arg1);
-
-    console.log("Answer:", answer, "|", "Result:", result);
-  }
+  findDeepest(node);
+  return deepestNode.val;
 };
 
-solutionCheck(inputs);
+//------------Solution Check------------------
+function node(val) {
+  return {
+    val,
+    left: null,
+    right: null,
+  };
+}
+let a = node("a");
+let b = node("b");
+let c = node("c");
+let d = node("d");
+let e = node("e");
+let f = node("f");
+
+a.left = b;
+a.right = c;
+b.right = d;
+d.left = f;
+c.left = e;
+
+console.log(deepestNode(a)); //Result: f
+
+let nodeA = node(30);
+let nodeB = node(25);
+let nodeC = node(35);
+let nodeD = node(20);
+let nodeE = node(26);
+let nodeF = node(32);
+let nodeG = node(40);
+let nodeH = node(19);
+
+nodeA.left = nodeB;
+nodeA.right = nodeC;
+nodeB.right = nodeD;
+nodeB.left = nodeE;
+nodeD.left = nodeH;
+nodeC.left = nodeF;
+nodeC.right = nodeG;
+
+console.log(deepestNode(nodeA)); //Result: 19
