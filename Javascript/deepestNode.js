@@ -9,7 +9,7 @@ tree1 =
   20 26  32  40
 19
 
-deepestNode(tree1) -> 19
+findNodeDFS(tree1) -> 19
 
 tree2 =
     A
@@ -17,7 +17,7 @@ tree2 =
    D    E
  F
 
- deepestNode(tree2) -> F
+ findNodeDFS(tree2) -> F
 
 ------Solution------
 -check if the node has a left, if yes call function again with that as the head node
@@ -33,35 +33,56 @@ O() -
 */
 
 //------------Solution------------------
-const deepestNode = node => {
-  let deepestNode;
-  let deepestCount = 0;
-  let counter = 0;
 
-  function findDeepest(node) {
+//Depth-first:post-order solution
+const findNodeDFS = node => {
+  let findNodeDFS;
+  let deepestCount = 0;
+
+  function findDeepest(node, counter = 0) {
     counter++;
 
     if (!node.left && !node.right) {
       if (counter > deepestCount) {
-        deepestNode = node;
+        findNodeDFS = node;
         deepestCount = counter;
       }
     }
 
     if (node.left) {
-      findDeepest(node.left);
+      findDeepest(node.left, counter);
     }
 
     if (node.right) {
-      findDeepest(node.right);
+      findDeepest(node.right, counter);
     }
 
     counter--;
   }
 
   findDeepest(node);
-  return deepestNode.val;
+  return findNodeDFS.val;
 };
+
+//Breadth-first solution
+const findNodeBFS = node => {
+  const queue = [node];
+
+  while (queue.length) {
+    node = queue.pop();
+
+    if (node.left) {
+      queue.unshift(node.left);
+    }
+
+    if (node.right) {
+      queue.unshift(node.right);
+    }
+  }
+
+  return node.val;
+};
+
 
 //------------Solution Check------------------
 function node(val) {
@@ -84,7 +105,8 @@ b.right = d;
 d.left = f;
 c.left = e;
 
-console.log(deepestNode(a)); //Result: f
+console.log(findNodeDFS(a)); //Result: f
+console.log(findNodeBFS(a)); //Result: f
 
 let nodeA = node(30);
 let nodeB = node(25);
@@ -103,4 +125,5 @@ nodeD.left = nodeH;
 nodeC.left = nodeF;
 nodeC.right = nodeG;
 
-console.log(deepestNode(nodeA)); //Result: 19
+console.log(findNodeDFS(nodeA)); //Result: 19
+console.log(findNodeBFS(nodeA)); //Result: 19
