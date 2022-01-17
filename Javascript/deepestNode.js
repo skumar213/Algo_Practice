@@ -20,15 +20,10 @@ tree2 =
  deepestNode(tree2) -> F
 
 ------Solution------
--check if the node has a left, if yes call function again with that as the head node
--otherwise check the right, if yes call the function again with that as the head node
--if there are no children, make that the deepest node, and change the level to how many levels that node is
-
-
-DFS:post-order
+-DFS:post-order
 Use a nested function to traverse the nodes, the inputs are the current node and level. If the current node has no children and the current level is higher than the previous highest one, it will make the current level and node the deepest in assigned variables. If the node does have a left or right, respectively. It will call the nested function again with that node and level + 1 as the arguments. It will keep going until it has gone through all the nodes and will then reutrn the value of the deepest node.
 
-BFS
+-BFS
 Use a queue to keep track of the order in which to analyze each node. The while loop will keep going as long as theres values in the queue and with each iteration will redefine the node as the currently selected node. When the while loop finishes, the node variable will be the deepest node in the tree. The function will return the value of that node.
 
 
