@@ -8,6 +8,8 @@ subsetSum(10, [1, 10, 5, 3]); // true
 
 subsetSum(9, [1, 10, 5, 3]); // true
 
+subsetSum(8, [1, 10, 5, 3]); // true
+
 subsetSum(19, [1, 10, 5, 3]); // true
 subsetSum(17, [1, 10, 5, 3]); // false
 
@@ -23,10 +25,10 @@ Edge cases
 -if nothing matches, then change the array to n-1 and repeat the process until array is empty
 
 ------Time complexity------
-O() -
+O(2 ^ N) -
 
 ------Space complexity------
-O() -
+O(2 ^ N) -
 */
 
 //------------Solution------------------
@@ -36,40 +38,29 @@ const subsetSum = (target, arr) => {
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
 
-    for (let j = i + 1; arr.length; j++) {
+    if (sum === target) return true;
+    else if (sum > target) {
+      sum -= arr[i];
+      continue;
+    }
 
+    for (let j = i + 1; j < arr.length; j++) {
+      const tmpSum = sum + arr[j];
+
+      if (tmpSum === target) return true;
     }
   }
 
+  if (arr.length) return subsetSum(target, arr.slice(1));
 
-
+  return false;
 };
-
-
-
-
-
-
-
 
 //------------Solution Check------------------
-const inputs = [
-  [false, "[][(){}"],
-  [false, "({)}"],
-  [true, "({[]})"],
-  [true, "text ( is allowed ){rwwrwrrww [] ()}"],
-];
 
-const fn = hasBalancedBrackets;
-
-const solutionCheck = inputs => {
-  for (let input of inputs) {
-    const answer = input[0];
-    const arg1 = input[1];
-    const result = fn(arg1);
-
-    console.log("Answer:", answer, "|", "Result:", result);
-  }
-};
-
-solutionCheck(inputs);
+console.log(subsetSum(2, [1, 10, 5, 3])); // false
+console.log(subsetSum(10, [1, 10, 5, 3])); // true
+console.log(subsetSum(9, [1, 10, 5, 3])); // true
+console.log(subsetSum(8, [1, 10, 5, 3])); // true
+console.log(subsetSum(19, [1, 10, 5, 3])); // true
+console.log(subsetSum(17, [1, 10, 5, 3])); // false
