@@ -15,60 +15,18 @@ rotateList(node, 6) -> [5,1,2,3,4]
 rotateList(node, 0) -> [1,2,3,4,5]
 
 ------Solution------
-if k is greater than the length - 1 of the array, k = k - arr.length
-use a while loop (while node.next exists) and push up the value to the results array
-  if at any point k is greater than or equal to the length, k = k - arr.length
-  then insert the value and k index
+Need variables to keep track of the current head to return and counters to keep track of the length of the nodes. Also a boolean to know when you've created a loop
 
-use a while loop and push all the nodes values to the resutls array
-then
-if k is greater than the length - 1 of the array, k = k - arr.length
+Loop through the nodes while keeping count of the length, once you hit the end, assign that nodes next value to the head value (also set the length count and make isLoop true). Then keep going through the nodes until you find the node that is suppose to be the new end (you find this by counting from the new head one to the length of the nodes). There you make the head.next value the resultHead to return and then set it to null. Return the head to break the while loop.
 
 ------Time complexity------
-O() -
+O(N) - Need to loop through the nodes less than two times so time is 2N -> N
 
 ------Space complexity------
-O() -
+O(1) - No extra space is used throughout the function
 */
 
 //------------Solution------------------
-// const rotateList1 = (head, k) => {
-//   if (!head) {
-//     return null;
-//   }
-
-//   const allNodes = [];
-//   let resultHead;
-
-//   while (head) {
-//     allNodes.push(head);
-//     head = head.next;
-//   }
-
-//  while (k >= allNodes.length) {
-//     k -= allNodes.length
-//   };
-
-//   const sortedNodes = allNodes
-//     .slice(allNodes.length - k)
-//     .concat(allNodes.slice(0, allNodes.length - k));
-
-//   resultHead = sortedNodes[0];
-//   head = sortedNodes[0];
-
-//   for (let i = 0; i < sortedNodes.length; i++) {
-//     if (i === sortedNodes.length - 1) {
-//       head.next = null;
-//     } else {
-//       head.next = sortedNodes[i + 1];
-
-//       head = head.next;
-//     }
-//   }
-
-//   return resultHead;
-// };
-
 const rotateList = (head, k) => {
   if (!head) return null;
   if (k === 0) return head;
@@ -78,7 +36,7 @@ const rotateList = (head, k) => {
   let count = 0;
   let isLoop = false;
 
-  while (head.next) {
+  while (true) {
     count++;
 
     if (!head.next) {
@@ -86,8 +44,7 @@ const rotateList = (head, k) => {
       nodeLength = count;
       isLoop = true;
 
-      k = k%nodeLength
-
+      k = k % nodeLength;
     } else if (k === nodeLength && isLoop) {
       resultHead = head.next;
       head.next = null;
