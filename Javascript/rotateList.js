@@ -32,34 +32,74 @@ O() -
 */
 
 //------------Solution------------------
-const rotateList = (head, k) => {
-  const allNodes = [];
-  let resultHead;
-  if (k >= allNodes.length) k -= allNodes.length;
+// const rotateList1 = (head, k) => {
+//   if (!head) {
+//     return null;
+//   }
 
-  while (head) {
-    allNodes.push(head);
+//   const allNodes = [];
+//   let resultHead;
+
+//   while (head) {
+//     allNodes.push(head);
+//     head = head.next;
+//   }
+
+//  while (k >= allNodes.length) {
+//     k -= allNodes.length
+//   };
+
+//   const sortedNodes = allNodes
+//     .slice(allNodes.length - k)
+//     .concat(allNodes.slice(0, allNodes.length - k));
+
+//   resultHead = sortedNodes[0];
+//   head = sortedNodes[0];
+
+//   for (let i = 0; i < sortedNodes.length; i++) {
+//     if (i === sortedNodes.length - 1) {
+//       head.next = null;
+//     } else {
+//       head.next = sortedNodes[i + 1];
+
+//       head = head.next;
+//     }
+//   }
+
+//   return resultHead;
+// };
+
+const rotateList = (head, k) => {
+  if (!head) return null;
+  if (k === 0) return head;
+
+  let resultHead = head;
+  let nodeLength = 0;
+  let count = 0;
+  let isLoop = false;
+
+  while (head.next) {
+    count++;
+
+    if (!head.next) {
+      head.next = resultHead;
+      nodeLength = count;
+      isLoop = true;
+
+      k = k%nodeLength
+
+    } else if (k === nodeLength && isLoop) {
+      resultHead = head.next;
+      head.next = null;
+      return resultHead;
+    }
+
+    if (nodeLength) {
+      k++;
+    }
+
     head = head.next;
   }
-
-  const sortedNodes = allNodes
-    .slice(allNodes.length - k)
-    .concat(allNodes.slice(0, allNodes.length - k));
-
-  resultHead = sortedNodes[0];
-  head = sortedNodes[0];
-
-  for (let i = 0; i < sortedNodes.length; i++) {
-    if (i === sortedNodes.length - 1) {
-      head.next = null;
-    } else {
-      head.next = sortedNodes[i + 1];
-
-      head = head.next;
-    }
-  }
-
-  return resultHead;
 };
 
 //------------Solution Check------------------
@@ -87,4 +127,4 @@ const solutionCheck = node => {
   console.log(results);
 };
 
-solutionCheck(rotateList(a, 1));
+solutionCheck(rotateList(a, 17));
