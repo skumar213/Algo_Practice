@@ -15,6 +15,8 @@ rotateList(node, 6) -> [5,1,2,3,4]
 rotateList(node, 0) -> [1,2,3,4,5]
 
 ------Solution------
+Have the edge cases up top, return null if head doesn't exist and return the head if k = 0. Now we now we do have to shift, even if its all the around back to the starting point
+
 Need variables to keep track of the current head to return and counters to keep track of the length of the nodes. Also a boolean to know when you've created a loop
 
 Loop through the nodes while keeping count of the length, once you hit the end, assign that nodes next value to the head value (also set the length count and make isLoop true). Then keep going through the nodes until you find the node that is suppose to be the new end (you find this by counting from the new head one to the length of the nodes). There you make the head.next value the resultHead to return and then set it to null. Return the head to break the while loop.
