@@ -29,34 +29,13 @@ Use a while loop (array includes null), then pop() (will be the current largest)
 [1,0,1,0,1,0,1]
 
 ------Time complexity------
-O() -
+O(N Log N) - We go through the list only once but using the sort method makes it N Log N.
 
 ------Space complexity------
-O() -
+O(N) - A copy of the input array is made
 */
 
 //------------Solution------------------
-const wiggleSort1 = nums => {
-  if (nums.length <= 1) return nums;
-
-  const numsCopy = nums.map(e => e);
-  numsCopy.sort((a, b) => a - b);
-
-  const indexStart = nums.length % 2 === 0 ? 1 : 0;
-  const secondLoopIndex = nums.length % 2 === 0 ? -2 : -1;
-
-  for (let i = indexStart; i < nums.length; i += 2) {
-    const currentLargestNum = indexStart === 1 ? numsCopy.pop() : numsCopy.shift();
-    nums[i] = currentLargestNum;
-
-    if (i === nums.length - 1) i = secondLoopIndex;
-  }
-
-  return nums;
-};
-
-
-
 const wiggleSort = nums => {
   if (nums.length <= 1) return nums;
 
@@ -76,8 +55,9 @@ const wiggleSort = nums => {
   return nums;
 };
 
-//
 
 //------------Solution Check------------------
 
 console.log(wiggleSort([1, 1, 2, 1, 2, 2, 1]));
+
+
