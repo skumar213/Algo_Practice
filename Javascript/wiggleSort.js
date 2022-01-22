@@ -41,7 +41,8 @@ const wiggleSort = nums => {
   const secondLoopIndex = nums.length % 2 === 0 ? -2 : -1;
 
   for (let i = indexStart; i < nums.length; i += 2) {
-    const currentLargestNum = indexStart === 1 ? numsCopy.pop() : numsCopy.shift();
+    const currentLargestNum =
+      indexStart === 1 ? numsCopy.pop() : numsCopy.shift();
     nums[i] = currentLargestNum;
 
     if (i === nums.length - 1) i = secondLoopIndex;
@@ -50,9 +51,6 @@ const wiggleSort = nums => {
   return nums;
 };
 
-
 //------------Solution Check------------------
 
 console.log(wiggleSort([1, 1, 2, 1, 2, 2, 1]));
-
-
