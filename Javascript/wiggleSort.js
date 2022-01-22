@@ -9,27 +9,22 @@ wiggleSort([1]) = [1]
 wiggleSort([]) = [];
 wiggleSort([1,3,2,1]) = [1,3,1,2]
 wiggleSort([1,3,2,2,3,1]) = [2,3,1,3,1,2]
-
-[1,1,2,2,3,3]
-
-[2,3,1,3,1,2]
+wiggleSort([1, 1, 2, 1, 2, 2, 1]) = [1,2,1,2,1,2,1]
 
 
 ------Solution------
-Each 3 combo is a subset and the start and end of each combo is part of another subset (except for first and last numbers)
+Return the array if its length is less than or equal to 1. Then make a copy and sorty it in ascending order.
+Then loop through the copied array and remove the largest number to be put into the original array (theres variables to know if the input array length is even or odd, this to know when to trigger the second loop). Loop through the array once putting the current largest number in the odd indices. Then on the second loop put the current largest number on the even indices.
 
-Make an array with the same length as the input with values of null
-Sort input array
-Use a while loop (array includes null), then pop() (will be the current largest) and insert it into odd indexes until you hit the end, then it will loop again putting the current largest on even inputs. So it will take two loops
+This will progress as follows:
+wiggleSort([1, 1, 2, 1, 2, 2, 1])
 
-[1,1,2,1,2,2,1]
+First loop [doesnt change, 2, doesnt change, 2, doesnt change, 2, doesnt change]
+Second loop [1, 2, 1, 2, 1, 2, 1]
 
-[1,1,1,1,2,2,2]
-
-[1,0,1,0,1,0,1]
 
 ------Time complexity------
-O(N Log N) - We go through the list only once but using the sort method makes it N Log N.
+O(N Log N) - We go through the input only once but using the sort method makes it N Log N.
 
 ------Space complexity------
 O(N) - A copy of the input array is made
