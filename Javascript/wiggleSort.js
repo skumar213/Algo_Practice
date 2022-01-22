@@ -13,13 +13,24 @@ wiggleSort([1, 1, 2, 1, 2, 2, 1]) = [1,2,1,2,1,2,1]
 
 
 ------Solution------
-Return the array if its length is less than or equal to 1. Then make a copy and sorty it in ascending order.
-Then loop through the copied array and remove the largest number to be put into the original array (theres variables to know if the input array length is even or odd, this to know when to trigger the second loop). Loop through the array once putting the current largest number in the odd indices. Then on the second loop put the current largest number on the even indices.
+Return the array if its length is less than or equal to 1 to cover the edge case. Then make a copy and sort it in ascending order.
+
+The function will differ depending if the input length is even or odd.
+
+If even, It will loop through the copied array and remove the largest number and replace the odd indices in the input array with it. Then on the second loop it will keep removing the largest numbers but putting it on the even indices.
+
+This is progress as follows:
+wiggleSort([1,3,2,2,3,1])
+First loop: [skip, 3, skip, 3, skip, 2]
+Second loop: [2,3,1,3,1,2]
+
+
+If odd, it will loop through the copied array and remove the smallest number and replace the even indices in the input array with it. Then on the second loop it will keep removing the smallest number but putting on the odd indices.
 
 This will progress as follows:
 wiggleSort([1, 1, 2, 1, 2, 2, 1])
 
-First loop [doesnt change, 2, doesnt change, 2, doesnt change, 2, doesnt change]
+First loop [skip, 2, skip, 2, skip, 2, skip]
 Second loop [1, 2, 1, 2, 1, 2, 1]
 
 
