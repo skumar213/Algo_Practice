@@ -6,12 +6,29 @@ Determine the minimum number of bribes that took place to get to a given queue o
 
 ------Examples------
 -Inputs & Outputs
-input = an array of numbers that represent a position in line, order matters
-output = an array of numbers that represent 
+input = an array of numbers that represent a position in line. Each number is where the person was originally before they moved. Starting with 1.
+output = a number that represent the total number of bribes made. A person can move as far back as they want but they can only move forward by two spaces
 
 -Edge Cases
+array is empty = return 0
+
+-Examples
+[1,2,3,4,5]
+
+minBribes([1,2,4,3,5]) = 1
+minBribes([5,4,3,2,1]) = "Too chaotic"
+minBribes([2,1,5,4,3]) = 3
+minBribes([2,1,5,3,4]) = 4
+minBribes([2,3,4,5,1]) = 4
+
 
 ------Solution------
+if array length is less than 2 return 0
+
+something needs to happen as I progress through the array since you can go as far back as you want but you can't move more than 2 forward
+
+loop through the array - 1 and check:
+  how far the current number from where it's supposed to be
 
 
 
