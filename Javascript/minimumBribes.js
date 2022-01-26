@@ -15,10 +15,11 @@ array is empty = return 0
 -Examples
 [1,2,3,4,5]
 
+
 minBribes([1,2,4,3,5]) = 1
 minBribes([5,4,3,2,1]) = "Too chaotic"
-minBribes([2,1,5,4,3]) = 3
-minBribes([2,1,5,3,4]) = 4
+minBribes([2,1,5,3,4]) = 3
+minBribes([2,1,5,4,3]) = 4 <-- edge case where a person bribes the person in front after they've already moved back
 minBribes([2,3,4,5,1]) = 4
 
 
@@ -27,9 +28,11 @@ if array length is less than 2 return 0
 
 something needs to happen as I progress through the array since you can go as far back as you want but you can't move more than 2 forward
 
-loop through the array - 1 and check:
-  how far the current number from where it's supposed to be
-
+loop through the array and check:
+  how far the current number is from where it's supposed to be
+    if its suppose to be toward the front skip
+    if its greater than 2 positions, return "Too chaotic"
+    if its less, add its total positions to the count
 
 
 ------Time complexity------
@@ -42,27 +45,31 @@ O() -
 //------------Solution------------------
 //Test all inputs before testing
 
+const minBribes = queue => {
+  let sum = 0;
+
+  for (let i = 0; i < queue.length; i++) {
+    const numOriginalIdx = queue[i] - 1;
+
+    if (i > numOriginalIdx) {
+      continue;
+    } else if (numOriginalIdx - i > 2) {
+      console.log("Too chaotic");
+      return;
+    } else {
+      sum += numOriginalIdx - i;
+    }
+  }
+
+  console.log(sum);
+  return;
+};
+
+
+
+
+
 
 
 
 //------------Solution Check------------------
-const inputs = [
-  [false, "[][(){}"],
-  [false, "({)}"],
-  [true, "({[]})"],
-  [true, "text ( is allowed ){rwwrwrrww [] ()}"],
-];
-
-const fn = hasBalancedBrackets;
-
-const solutionCheck = inputs => {
-  for (let input of inputs) {
-    const answer = input[0];
-    const arg1 = input[1];
-    const result = fn(arg1);
-
-    console.log("Answer:", answer, "|", "Result:", result);
-  }
-};
-
-solutionCheck(inputs);
