@@ -47,81 +47,44 @@ O() -
 
 
 /*
+[2,1,5,4,3]
+
+Need to check how many bribes the person in front took if the current index
 
 
-
-
-[2,1,5,4,3,6] = 4
-[2,1,5,4,6,3] = 5
-
-minBribes([2,1,5,4,6,3]) //5
-
-minBribes([2,1,5,4,3])  //4
-
-
-
-[1,2,5,3,7,8,6,4] = 7
-
-
-
-
-
-[1,2,5,3,7,8,4,6] = 6
 */
 
 const minBribes = queue => {
   let sum = 0;
+  queue = queue.map(num => num-1);
 
   for (let i = 0; i < queue.length; i++) {
-    const numOriginalIdx = queue[i] - 1;
-    const diff = Math.abs(numOriginalIdx - i)
-
-    if (numOriginalIdx - i > 2) {
-      console.log("Too chaotic");
-      return;
+    if (queue[i] - i > 2) {
+      console.log('Too chaotic')
+      return
     }
 
-    if (numOriginalIdx - i >= 0) {
-      continue;
-    }
+    
 
 
-    sum += diff
-
-    if (queue[i-diff] !== (queue[i] +  diff)) {
-      sum++
-    }
 
   }
 
-  console.log(sum);
-  return;
+
 };
 
 //------------Solution Check------------------
-minBribes([1,2,4,3,5]) //1
-minBribes([5,4,3,2,1]) //too chaotic
-minBribes([2,1,5,3,4]) //3
-minBribes([2,3,4,5,1]) //4
-
-
-// minBribes([2,1,5,4,3])  //4
-
-// minBribes([2,1,5,4,6,3]) //5
-
-// minBribes([1,2,5,3,7,8,6,4])
-
-
-
+// minBribes([1,2,4,3,5]) //1
+// minBribes([5,4,3,2,1]) //too chaotic
 // minBribes([2,1,5,3,4]) //3
-
-/*
-1
-1
-1
+// minBribes([2,3,4,5,1]) //4
+minBribes([2,1,5,4,3]) //4
 
 
-*/
+
+
+
+
 
 
 
