@@ -45,17 +45,104 @@ O() -
 //------------Solution------------------
 //Test all inputs before testing
 
+
+/*
+
+
+
+
+[2,1,5,4,3,6] = 4
+[2,1,5,4,6,3] = 5
+
+minBribes([2,1,5,4,6,3]) //5
+
+minBribes([2,1,5,4,3])  //4
+
+
+
+[1,2,5,3,7,8,6,4] = 7
+
+
+
+
+
+[1,2,5,3,7,8,4,6] = 6
+*/
+
 const minBribes = queue => {
   let sum = 0;
 
   for (let i = 0; i < queue.length; i++) {
     const numOriginalIdx = queue[i] - 1;
+    const diff = Math.abs(numOriginalIdx - i)
 
-    if (i > numOriginalIdx) {
-      continue;
-    } else if (numOriginalIdx - i > 2) {
+    if (numOriginalIdx - i > 2) {
       console.log("Too chaotic");
       return;
+    }
+
+    if (numOriginalIdx - i >= 0) {
+      continue;
+    }
+
+
+    sum += diff
+
+    if (queue[i-diff] !== (queue[i] +  diff)) {
+      sum++
+    }
+
+  }
+
+  console.log(sum);
+  return;
+};
+
+//------------Solution Check------------------
+minBribes([1,2,4,3,5]) //1
+minBribes([5,4,3,2,1]) //too chaotic
+minBribes([2,1,5,3,4]) //3
+minBribes([2,3,4,5,1]) //4
+
+
+// minBribes([2,1,5,4,3])  //4
+
+// minBribes([2,1,5,4,6,3]) //5
+
+// minBribes([1,2,5,3,7,8,6,4])
+
+
+
+// minBribes([2,1,5,3,4]) //3
+
+/*
+1
+1
+1
+
+
+*/
+
+
+
+/*
+const minBribes = queue => {
+  let sum = 0;
+
+  for (let i = 0; i < queue.length - 1; i++) {
+    const numOriginalIdx = queue[i] - 1; // i = 0, origIdx = 1
+
+    if (numOriginalIdx - i > 2) {
+      console.log("Too chaotic");
+      return;
+    }
+
+    if (i >= numOriginalIdx) {
+      if (queue[i] < queue[i+1]) {
+        continue;
+      } else {
+        sum++
+      }
     } else {
       sum += numOriginalIdx - i;
     }
@@ -68,8 +155,38 @@ const minBribes = queue => {
 
 
 
+const minBribes = queue => {
+  let sum = 0;
+  let previousMoveCount = 0;
+
+  for (let i = 0; i < queue.length; i++) {
+    const numOriginalIdx = queue[i] - 1;
+
+    if (numOriginalIdx - i > 2) {
+      console.log("Too chaotic");
+      return;
+    }
+
+    if (numOriginalIdx - i === 0 && previousMoveCount) {
+      previousMoveCount--
+      continue
+    }
+
+    if (numOriginalIdx - i > 0) {
+      sum += numOriginalIdx - i;
+      previousMoveCount += numOriginalIdx - i
+    } else {
+      sum -= numOriginalIdx - i;
+      sum -= previousMoveCount;
+      previousMoveCount = 0;
+    }
 
 
+  }
+
+  console.log(sum);
+  return;
+};
 
 
-//------------Solution Check------------------
+*/
