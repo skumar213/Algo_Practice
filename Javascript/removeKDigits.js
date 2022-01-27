@@ -37,12 +37,7 @@ O(N) - Have a stack keeping track of the numbers and in worst case needs to hold
 */
 
 //------------Solution------------------
-//Test all inputs before testing
-/*
-0200
 
-1
-*/
 const removeKdigits = (num, k) => {
   if (!num || num.length === k) return "0";
   if (k === 0) return num;
@@ -72,7 +67,7 @@ const removeKdigits = (num, k) => {
 //------------Solution Check------------------
 // console.log(removeKdigits("111111110", 3)); //111110
 // console.log(removeKdigits("1173", 2)); //11
-console.log(removeKdigits("1432219", 3)) //1219
+console.log(removeKdigits("1432219", 3)); //1219
 // console.log(removeKdigits('10200', 1)) //200
 // console.log(removeKdigits("1234567890", 9)); //0
 // console.log(removeKdigits('4321', 2)) //21
