@@ -21,52 +21,60 @@ removeKdigits('10200, 1) = 200
 
 
 ------Solution------
-Need to keep track how far away from the end of the string you are. Need to stop switching numbers when the end is getting to short
-convert the string to an array
-loop through the input string for the length of k
-  checking if the current number is less than the next
-    if it is greater or equal you remove it from (splice)
-    if less you move to the next digit (don't iterate the for loop, use a while loop that keeps going until it is greater)
-remove any leading zeros and then join array
-
+Use a stack to keep track of the most recent item
+Then loop through the string
+  if the current number is less than the one in the stack (Use a while loop to keep doing this until false, or you've already removed the required amount)
+    remove the item from the stack and decrement the amount needed to remove
+  push the current number to the stack
+The loop could end without the required amount being removed. If thats the case shorten the stack by that amount from the end.
+Then return the stack as the final number
 
 ------Time complexity------
-O() -
+O(N) - Even though there's a nested while loop it won't run more than N. Worst case the for loop will make it to the last number and then the while loop will have to run through the length of the string again to update the stack = 2N.
 
 ------Space complexity------
-O() -
+O(N) - Have a stack keeping track of the numbers and in worst case needs to hold all the numbers.
 */
 
 //------------Solution------------------
 //Test all inputs before testing
+/*
+0200
+
+1
+*/
 const removeKdigits = (num, k) => {
-  
+  if (!num || num.length === k) return "0";
+  if (k === 0) return num;
 
-
-
-
-}
-
-
-
-//------------Solution Check------------------
-const inputs = [
-  [false, "[][(){}"],
-  [false, "({)}"],
-  [true, "({[]})"],
-  [true, "text ( is allowed ){rwwrwrrww [] ()}"],
-];
-
-const fn = hasBalancedBrackets;
-
-const solutionCheck = inputs => {
-  for (let input of inputs) {
-    const answer = input[0];
-    const arg1 = input[1];
-    const result = fn(arg1);
-
-    console.log("Answer:", answer, "|", "Result:", result);
+  const stack = [];
+  for (let i = 0; i < num.length; i++) {
+    while (k > 0 && stack.length > 0 && stack[stack.length - 1] > num[i]) {
+      stack.pop();
+      k--;
+    }
+    stack.push(num[i]);
   }
+
+  if (k) {
+    stack.splice(-k);
+  }
+
+  while (stack[0] === "0") {
+    stack.splice(0, 1);
+  }
+
+  const finalNum = stack.join("");
+
+  return `${finalNum.length === 0 ? "0" : finalNum}`;
 };
 
-solutionCheck(inputs);
+//------------Solution Check------------------
+// console.log(removeKdigits("111111110", 3)); //111110
+// console.log(removeKdigits("1173", 2)); //11
+console.log(removeKdigits("1432219", 3)) //1219
+// console.log(removeKdigits('10200', 1)) //200
+// console.log(removeKdigits("1234567890", 9)); //0
+// console.log(removeKdigits('4321', 2)) //21
+// console.log(removeKdigits('99321', 3)) //21
+// console.log(removeKdigits('10001', 4)) // 0
