@@ -45,7 +45,6 @@ O() -
 //------------Solution------------------
 //Test all inputs before testing
 
-
 /*
 [2,1,5,4,3] = 4
 [1,0,4,3,2]
@@ -59,106 +58,38 @@ Need to check how many bribes the person in front took if the current index
 */
 
 const minBribes = queue => {
-  let sum = 0;
-  queue = queue.map(num => num-1);
+  let moves = 0;
+  queue = queue.map(num => num - 1);
 
   for (let i = 0; i < queue.length; i++) {
     if (queue[i] - i > 2) {
-      console.log('Too chaotic')
-      return
+      console.log("Too chaotic");
+      return;
     }
 
-    const diff = queue[i] - i
+    for (let j = queue[i] - 1; j <= i - 1; j++) {
+      console.log(queue[i] - 1, i - 1, '-', i)
 
-    if (diff > 0) {
-
+      if (queue[j] > queue[i]) {
+        moves++;
+      }
     }
-
-
-
-
   }
 
-
+  // console.log(moves)
 };
 
 //------------Solution Check------------------
-// minBribes([1,2,4,3,5]) //1
+minBribes([1,2,4,3,5]) //1
 // minBribes([5,4,3,2,1]) //too chaotic
 // minBribes([2,1,5,3,4]) //3
 // minBribes([2,3,4,5,1]) //4
-minBribes([2,1,5,4,3]) //4
-
-
-
-
-
-
-
-
+// minBribes([2, 1, 5, 4, 3]); //4
+// minBribes([1, 2, 5, 3, 7, 8, 6, 4]); // 7
 
 /*
-const minBribes = queue => {
-  let sum = 0;
-
-  for (let i = 0; i < queue.length - 1; i++) {
-    const numOriginalIdx = queue[i] - 1; // i = 0, origIdx = 1
-
-    if (numOriginalIdx - i > 2) {
-      console.log("Too chaotic");
-      return;
-    }
-
-    if (i >= numOriginalIdx) {
-      if (queue[i] < queue[i+1]) {
-        continue;
-      } else {
-        sum++
-      }
-    } else {
-      sum += numOriginalIdx - i;
-    }
-  }
-
-  console.log(sum);
-  return;
-};
-
-
-
-
-const minBribes = queue => {
-  let sum = 0;
-  let previousMoveCount = 0;
-
-  for (let i = 0; i < queue.length; i++) {
-    const numOriginalIdx = queue[i] - 1;
-
-    if (numOriginalIdx - i > 2) {
-      console.log("Too chaotic");
-      return;
-    }
-
-    if (numOriginalIdx - i === 0 && previousMoveCount) {
-      previousMoveCount--
-      continue
-    }
-
-    if (numOriginalIdx - i > 0) {
-      sum += numOriginalIdx - i;
-      previousMoveCount += numOriginalIdx - i
-    } else {
-      sum -= numOriginalIdx - i;
-      sum -= previousMoveCount;
-      previousMoveCount = 0;
-    }
-
-
-  }
-
-  console.log(sum);
-  return;
-};
+queue[i] = 3
+i = 1
 
 
 */
