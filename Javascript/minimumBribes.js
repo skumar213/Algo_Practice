@@ -47,9 +47,13 @@ O() -
 
 
 /*
-[2,1,5,4,3]
+[2,1,5,4,3] = 4
+[1,0,4,3,2]
 
 Need to check how many bribes the person in front took if the current index
+
+1
+2
 
 
 */
@@ -64,7 +68,12 @@ const minBribes = queue => {
       return
     }
 
-    
+    const diff = queue[i] - i
+
+    if (diff > 0) {
+
+    }
+
 
 
 
