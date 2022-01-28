@@ -25,10 +25,10 @@ For loop from 0 to n
 
 
 ------Time complexity------
-O() -
+O(N Log N) -
 
 ------Space complexity------
-O() -
+O(M) - The output array doesn't count towards the space compexity but the helper function creates a string the length of the numbers binary equivalent
 */
 
 //------------Solution------------------
@@ -38,7 +38,7 @@ const countBits = (n) => {
   const ans = [];
 
   for (let i = 0; i <= n; i++) {
-    const bitCount = i.toString(2).split('').reduce((accu, bit) => accu + Number(bit), 0)
+    const bitCount = getCount(i);
 
     ans.push(bitCount);
   }
@@ -48,7 +48,16 @@ const countBits = (n) => {
 
 
 
+const getCount = (i) => {
+  const newBit = i.toString(2)
+  let count = 0;
 
+  for (let bit of newBit) {
+    count += parseInt(bit)
+  }
+
+  return count;
+}
 
 //------------Solution Check------------------
 console.log(countBits(5))
