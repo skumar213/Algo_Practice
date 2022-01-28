@@ -14,7 +14,7 @@ Time complexity:
 O(N^2) - you have to iterate through the array and then again for each static number
 
 Space complexity:
-O(N) - the result array at worst case could include all the numbers of the input array
+O(1) - the output array does not count towards the space complexity
 
 */
 //------------Solution------------------

@@ -26,7 +26,7 @@ O(N!) - You have to go through all the permutations
 
 ------Space complexity------
 Iterative and Recursive
-O(N!) - You have to store all the permutations in an array
+O(N!) - The results array is the output so it doesn't count towards space complexity. But you have to store a copy of all the permutations in tmpResults array in the final iteration.
 
 */
 
