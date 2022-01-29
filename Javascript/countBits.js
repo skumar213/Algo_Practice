@@ -25,10 +25,10 @@ For loop from 0 to n
 
 
 ------Time complexity------
-O(N Log N) -
+O(N) - countBits will have to loop through 0 to n = O(N). getCount will at most have to do 32 iterations for a 32-bit number. In the worst case (if the digit is all 1's) it won't go over 32, therefore making it O(1)
 
 ------Space complexity------
-O(M) - The output array doesn't count towards the space compexity but the helper function creates a string the length of the numbers binary equivalent
+O(1) - The output array doesn't count towards the space compexity.
 */
 
 //------------Solution------------------
@@ -48,34 +48,22 @@ const countBits = (n) => {
 
 
 
-const getCount = (i) => {
-  const newBit = i.toString(2)
-  let count = 0;
-
-  for (let bit of newBit) {
-    count += parseInt(bit)
+const getCount = (x) => {
+  let count;
+  for (count = 0; x !== 0; count++) {
+    console.log(x)
+    x &= x - 1
+    console.log(x, count)
   }
 
   return count;
 }
+//As input increases the number of iterations never passes 32 since its checking 32-bit integers. Worst case it would be all 1's.
+
+
+
+
 
 //------------Solution Check------------------
-console.log(countBits(5))
+console.log(optiCount(4))
 
-
-
-/*
-const getCount = (i) => {
-  const newBit = i.toString(2)
-  let count = 0;
-
-  for (let bit of newBit) {
-    count += parseInt(bit)
-  }
-
-  return count;
-}
-
-
-
-*/
