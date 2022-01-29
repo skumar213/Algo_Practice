@@ -61,3 +61,21 @@ const getCount = (i) => {
 
 //------------Solution Check------------------
 console.log(countBits(5))
+
+
+
+/*
+const getCount = (i) => {
+  const newBit = i.toString(2)
+  let count = 0;
+
+  for (let bit of newBit) {
+    count += parseInt(bit)
+  }
+
+  return count;
+}
+
+
+
+*/
