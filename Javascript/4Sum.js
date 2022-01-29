@@ -30,18 +30,18 @@ use a helper function to find if any two equal the sum. then use it to find if a
 
 
 ------Time complexity------
-O(n ^ 3) -
+O(N ^ 3) - Each nested loop has to go through n iterations
 
 ------Space complexity------
-O() -
+O(M) - Will eventually return all the values from the ans object and it will be a length of all the combinations that equal the target.
+
 */
 
 //------------Solution------------------
 //Test all inputs before testing
 const fourSum = (arr, target) => {
   arr.sort((a, b) => a - b);
-  const ans = [];
-  const duplicateCheck = [];
+  const ans = {};
 
   for (let i = 0; i < arr.length - 2; i++) {
     const firstNum = arr[i];
@@ -55,9 +55,13 @@ const fourSum = (arr, target) => {
         const currentSum = firstNum + secondNum + arr[p1] + arr[p2];
 
         if (currentSum === target) {
-          if (!duplicateCheck.includes(`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`)) {
-            ans.push([firstNum, secondNum, arr[p1], arr[p2]]);
-            duplicateCheck.push(`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`)
+          if (!ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`]) {
+            ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`] = [
+              firstNum,
+              secondNum,
+              arr[p1],
+              arr[p2],
+            ];
             p1++;
             p2--;
           } else {
@@ -72,14 +76,9 @@ const fourSum = (arr, target) => {
     }
   }
 
-  return ans
+  return Object.values(ans);
 };
 
-const twoSum = (arr, target) => {
-  
-}
-
-
 //------------Solution Check------------------
-console.log(fourSum([1,0,-1,0,-2,2], 0)) // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-console.log(fourSum([2,2,2,2,2], 8)) // [[2,2,2,2]]
+console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
