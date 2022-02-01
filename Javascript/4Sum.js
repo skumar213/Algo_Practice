@@ -40,50 +40,57 @@ O(M) - Will eventually return all the values from the ans object and it will be 
 //------------Solution------------------
 //Test all inputs before testing
 
-//------------Solution Check------------------
-console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
-
 const fourSum = (arr, target) => {
   arr.sort((a, b) => a - b);
-  const ans = {};
+  const ans = [];
 
-  for (let i = 0; i < arr.length - 2; i++) {
-    const firstNum = arr[i];
+  const twoSum = (arr, p1, p2, sum, target) => {
+    const tmpResults = [];
 
-    for (let j = i + 1; j < arr.length - 1; j++) {
-      const secondNum = arr[j];
-      let p1 = j + 1;
-      let p2 = arr.length - 1;
-
-      twoSum();
-    }
-  }
-
-  const twoSum = () => {
     while (p1 < p2) {
-      const currentSum = firstNum + secondNum + arr[p1] + arr[p2];
+      const currentSum = sum + arr[p1] + arr[p2];
 
       if (currentSum === target) {
-        if (!ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`]) {
-          ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`] = [
-            firstNum,
-            secondNum,
-            arr[p1],
-            arr[p2],
-          ];
-          p1++;
-          p2--;
-        } else {
-          p1++;
-        }
+        tmpResults.push([arr[p1], arr[p2]]);
+
+        p1++;
+        p2--;
       } else if (currentSum > target) {
         p2--;
       } else if (currentSum < target) {
         p1++;
       }
     }
+
+    return tmpResults;
   };
 
-  return Object.values(ans);
+  for (let i = 0; i < arr.length; i++) {
+    const firstNum = arr[i];
+
+    for (let j = i + 1; j < arr.length; j++) {
+      const secondNum = arr[j];
+      let p1 = j + 1;
+      let p2 = arr.length - 1;
+
+      const tmpResults = twoSum(arr, p1, p2, firstNum + secondNum, target);
+
+      if (tmpResults.length) {
+        for (let nums of tmpResults) {
+          nums.unshift(secondNum);
+          nums.unshift(firstNum);
+
+          ans.push(nums);
+        }
+      }
+    }
+  }
+
+  return ans;
 };
+
+//------------Solution Check------------------
+console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
+
+//[ -2, -1, 0, 0, 1, 2 ]
