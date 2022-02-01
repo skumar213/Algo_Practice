@@ -39,6 +39,11 @@ O(M) - Will eventually return all the values from the ans object and it will be 
 
 //------------Solution------------------
 //Test all inputs before testing
+
+//------------Solution Check------------------
+console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
+
 const fourSum = (arr, target) => {
   arr.sort((a, b) => a - b);
   const ans = {};
@@ -51,34 +56,34 @@ const fourSum = (arr, target) => {
       let p1 = j + 1;
       let p2 = arr.length - 1;
 
-      while (p1 < p2) {
-        const currentSum = firstNum + secondNum + arr[p1] + arr[p2];
-
-        if (currentSum === target) {
-          if (!ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`]) {
-            ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`] = [
-              firstNum,
-              secondNum,
-              arr[p1],
-              arr[p2],
-            ];
-            p1++;
-            p2--;
-          } else {
-            p1++;
-          }
-        } else if (currentSum > target) {
-          p2--;
-        } else if (currentSum < target) {
-          p1++;
-        }
-      }
+      twoSum();
     }
   }
 
+  const twoSum = () => {
+    while (p1 < p2) {
+      const currentSum = firstNum + secondNum + arr[p1] + arr[p2];
+
+      if (currentSum === target) {
+        if (!ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`]) {
+          ans[`[${firstNum}, ${secondNum}, ${arr[p1]}, ${arr[p2]}]`] = [
+            firstNum,
+            secondNum,
+            arr[p1],
+            arr[p2],
+          ];
+          p1++;
+          p2--;
+        } else {
+          p1++;
+        }
+      } else if (currentSum > target) {
+        p2--;
+      } else if (currentSum < target) {
+        p1++;
+      }
+    }
+  };
+
   return Object.values(ans);
 };
-
-//------------Solution Check------------------
-console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
