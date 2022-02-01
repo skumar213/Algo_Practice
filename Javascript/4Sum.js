@@ -40,15 +40,16 @@ O(M) - Will eventually return all the values from the ans object and it will be 
 //------------Solution------------------
 //Test all inputs before testing
 
-const fourSum = (arr, target) => {
+const fourSum = (arr, target, k) => {
   arr.sort((a, b) => a - b);
-  const ans = [];
 
-  const twoSum = (arr, p1, p2, sum, target) => {
+  const twoSum = (arr, target) => {
     const tmpResults = [];
+    let p1 = 0;
+    let p2 = arr.length - 1;
 
     while (p1 < p2) {
-      const currentSum = sum + arr[p1] + arr[p2];
+      const currentSum = arr[p1] + arr[p2];
 
       if (currentSum === target) {
         tmpResults.push([arr[p1], arr[p2]]);
@@ -65,32 +66,36 @@ const fourSum = (arr, target) => {
     return tmpResults;
   };
 
-  for (let i = 0; i < arr.length; i++) {
-    const firstNum = arr[i];
+  const ksum = (arr, target, k) => {
+    const ans = [];
 
-    for (let j = i + 1; j < arr.length; j++) {
-      const secondNum = arr[j];
-      let p1 = j + 1;
-      let p2 = arr.length - 1;
 
-      const tmpResults = twoSum(arr, p1, p2, firstNum + secondNum, target);
+    if (k === 2) {
+      return twoSum(arr, target);
+    } else {
+      for (let i = 0; i < arr.length; i++) {
+        const currentNum = arr[i];
 
-      if (tmpResults.length) {
-        for (let nums of tmpResults) {
-          nums.unshift(secondNum);
-          nums.unshift(firstNum);
+        const tmpResults = ksum(arr.slice(i+1), target - currentNum, k - 1);
 
-          ans.push(nums);
+        if (tmpResults.length) {
+          for (let nums of tmpResults) {
+            nums.unshift(currentNum);
+
+            ans.push(nums);
+          }
         }
       }
     }
-  }
 
-  return ans;
+    return ans;
+  };
+
+  return ksum(arr, target, k);
 };
 
 //------------Solution Check------------------
-console.log(fourSum([1, 0, -1, 0, -2, 2], 0)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
-console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
+// console.log(fourSum([1, 0, -1, 0, -2, 2], 0, 4)); // [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+// console.log(fourSum([2, 2, 2, 2, 2], 8)); // [[2,2,2,2]]
 
 //[ -2, -1, 0, 0, 1, 2 ]
