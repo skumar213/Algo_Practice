@@ -115,5 +115,5 @@ const solutionCheck = input => {
 };
 
 // BFS(a, solutionCheck)
-// DFSPre(a, solutionCheck);
+DFSPre(a, solutionCheck);
 // DFSPost(a, solutionCheck);
