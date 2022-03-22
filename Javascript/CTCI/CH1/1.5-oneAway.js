@@ -1,4 +1,6 @@
 function oneAway(w1, w2) {
+  if (Math.abs(w1.length - w2.length) > 1) return false;
+
   const sameLength = w1.length === w2.length ? true : false;
 
   if (w1.length < w2.length) {
@@ -18,7 +20,7 @@ function oneAway(w1, w2) {
       count++;
       if (count > 1) return false;
 
-      //needed when for the 'replace' condition
+      //needed for the 'replace' condition, increment both pointers for 'replace' and just p1 otherwise
       if (!sameLength) {
         continue;
       }
