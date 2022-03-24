@@ -113,3 +113,6 @@ function heapSort(itemsArr) {
 
 //Test
 heapSort([8, 3, 6, 2, 4, 9, 1, 5, 7]);
+
+//Time: O(n log n) - it takes lg n to reach the bottom of a binary tree and need to do it n times
+//Space: O(1) - constant space used
