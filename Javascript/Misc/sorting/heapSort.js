@@ -92,11 +92,11 @@ class PriorityQueue {
   }
 }
 
-function makeHeap(q, itemsArr) {
-  q.init();
+function makeHeap(pq, itemsArr) {
+  pq.init();
 
   for (let i = 0; i < itemsArr.length; i++) {
-    q.insert(itemsArr[i]);
+    pq.insert(itemsArr[i]);
   }
 }
 
@@ -116,3 +116,12 @@ heapSort([8, 3, 6, 2, 4, 9, 1, 5, 7]);
 
 //Time: O(n log n) - it takes lg n to reach the bottom of a binary tree and need to do it n times
 //Space: O(1) - constant space used
+
+//How it works:
+  //When you insert it becomes (each element is setup in the correct order in the priority queue. The parent must dominate its children)
+      //[ 1, 3, 2, 5, 4, 9, 6, 8, 7 ]
+  //Then 1 is removed and the last element is put in its place
+      //[ 7, 3, 2, 5, 4, 9, 6, 8 ]
+  //Then it bubbles down to the correct spot
+      //[ 2, 3, 6, 5, 4, 9, 7, 8 ]
+  //Then keeps repeating the process
