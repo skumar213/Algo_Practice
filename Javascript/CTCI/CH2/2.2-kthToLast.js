@@ -3,13 +3,13 @@
 function kthToLast(head, k) {
   let head2 = head;
 
-  //get the k - 1 element from the head
-  for (let i = 1; i < k; i++) {
-    head2 = head2.next; //2
+  //get the kth element from the head
+  for (let i = 0; i < k; i++) {
     if (!head2) return "too short";
+    head2 = head2.next;
   }
 
-  while (head2.next) {
+  while (head2) {
     head = head.next;
     head2 = head2.next;
   }
