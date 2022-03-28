@@ -42,5 +42,5 @@ console.log(kthToLast(one, 3)); //4
 console.log(kthToLast(one, 13)); //too short
 console.log(kthToLast(one, 6)); //1
 
-//Time: O(n) - goes through full array
+//Time: O(n) - goes through all nodes
 //Space: O(1) - no space is used
