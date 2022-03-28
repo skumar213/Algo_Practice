@@ -1,6 +1,6 @@
 //Finds the kth element from the end in a linked list
 
-function kDeepFromEnd(head, k) {
+function kthToLast(head, k) {
   let head2 = head;
 
   //get the k - 1 element from the head
@@ -38,9 +38,9 @@ three.next = four;
 four.next = five;
 five.next = six;
 
-console.log(kDeepFromEnd(one, 3)); //4
-console.log(kDeepFromEnd(one, 13)); //too short
-console.log(kDeepFromEnd(one, 6)); //1
+console.log(kthToLast(one, 3)); //4
+console.log(kthToLast(one, 13)); //too short
+console.log(kthToLast(one, 6)); //1
 
 //Time: O(n) - goes through full array
 //Space: O(1) - no space is used
