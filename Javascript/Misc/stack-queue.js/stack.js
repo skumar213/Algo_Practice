@@ -42,7 +42,7 @@ console.log(stack.stack);
 
 /*
 ------Notes-----
-1) A stack uses LIFO (last-in first-out) ordering. The most recent item added tot he stack sit he first item to be removed. Pancake analogy.
+1) A stack uses LIFO (last-in first-out) ordering. The most recent item added to the stack sit he first item to be removed. Pancake analogy.
 2)Methods:
     1) pop(): Remove the top item from the stack
     2) push(item): Add an item to the top of the stack
