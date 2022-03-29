@@ -4,9 +4,9 @@ class Stack {
     this.top = null;
   }
 
-  push(data) {
-    this.stack.push(data);
-    this.top = data;
+  push(item) {
+    this.stack.push(item);
+    this.top = item;
   }
 
   pop() {
@@ -23,8 +23,7 @@ class Stack {
   }
 
   isEmpty() {
-    if (this.top === null) return true;
-    return false;
+    return this.top === null;
   }
 }
 
@@ -50,7 +49,7 @@ console.log(stack.stack);
     3) peek(): Return the top of the stack
     4) isEmpty(): Return true if and only if the stack is empty
 3) Downside is that you no longer have constant time access to items but it does have constant time add/remove.
-4) Stacks are good for recursive algorithms. Sometimes you need to push temporary data onto a stack as you recurse, but then remove them as you backtrack.
+4) Stacks are good for recursive algorithms. Sometimes you need to push temporary item onto a stack as you recurse, but then remove them as you backtrack.
     1) Can also be used to impliment a recursive algorithm iteratively
-
+5) Can also be implimented as a linked list.
 */
