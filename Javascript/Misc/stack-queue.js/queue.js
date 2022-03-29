@@ -52,12 +52,12 @@ console.log(queue.isEmpty());
 console.log(queue.queue);
 
 /*
-1) A queue uses FIFO (first-in first-out). Items are removed from the data structure int eh same order that they are added. A line to the movies analogy.
+1) A queue uses FIFO (first-in first-out). Items are removed from the data structure in the same order that they are added. A line to the movies analogy.
 2) Methods
     1) add(item): Add an item tot he end of the queue
     2) remove(): Remove the first item in the queue
     3) peek(): Return the top of the queue
     4) isEmpty(): Return true if and only if the queue is empty
 3) Can also be implimented with a linked list
-4) Queues are used in breeadth-first search or in implimenting a cache
+4) Queues are used in breadth-first search or in implimenting a cache
 */
