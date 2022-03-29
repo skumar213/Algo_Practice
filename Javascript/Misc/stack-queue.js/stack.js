@@ -4,12 +4,12 @@ class Stack {
     this.top = null;
   }
 
-  add(data) {
+  push(data) {
     this.stack.push(data);
     this.top = data;
   }
 
-  remove() {
+  pop() {
     if (this.top === null) return "Empty Stack";
 
     const removedItem = this.stack.pop();
@@ -30,13 +30,27 @@ class Stack {
 
 const stack = new Stack();
 
-stack.add(1);
-stack.add(2);
-stack.add(3);
+stack.push(1);
+stack.push(2);
+stack.push(3);
 
-stack.remove();
-stack.remove();
-stack.remove();
+stack.pop();
+stack.pop();
+stack.pop();
 
-console.log(stack.isEmpty);
+console.log(stack.isEmpty());
 console.log(stack.stack);
+
+/*
+------Notes-----
+1) A stack uses LIFO (last-in first-out) ordering. The most recent item added tot he stack sit he first item to be removed. Pancake analogy.
+2)Methods:
+    1) pop(): Remove the top item from the stack
+    2) push(item): Add an item to the top of the stack
+    3) peek(): Return the top of the stack
+    4) isEmpty(): Return true if and only if the stack is empty
+3) Downside is that you no longer have constant time access to items but it does have constant time add/remove.
+4) Stacks are good for recursive algorithms. Sometimes you need to push temporary data onto a stack as you recurse, but then remove them as you backtrack.
+    1) Can also be used to impliment a recursive algorithm iteratively
+
+*/
