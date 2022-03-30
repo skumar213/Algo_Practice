@@ -1,20 +1,17 @@
+const countNodes = headNode => {
+  let count = 0;
+
+  while (headNode) {
+    count++;
+    headNode = headNode.next;
+  }
+
+  return count;
+};
+
 function sumListFor(n1, n2) {
-  let ans = "";
-  let n1Copy = n1;
-  let n2Copy = n2;
-  let n1Count = 0;
-  let n2Count = 0;
-
-  while (n1Copy) {
-    n1Count++;
-    n1Copy = n1Copy.next;
-  }
-  while (n2Copy) {
-    n2Count++;
-    n2Copy = n2Copy.next;
-  }
-
-  let difference = n1Count - n2Count;
+  let headNode = null;
+  let difference = countNodes(n1) - countNodes(n2);
 
   function findSum(n1, n2) {
     if (!n1 && !n2) return 0;
@@ -36,21 +33,30 @@ function sumListFor(n1, n2) {
     const n2Next = n2 ? n2.next : null;
     let remainder = findSum(n1Next, n2Next);
 
-    const n1Value = n1 ? n1.value : 0;
-    const n2Value = n2 ? n2.value : 0;
-
-    const sum = n1Value + n2Value + remainder;
-    const currentValue = sum < 10 ? sum.toString() : sum.toString()[1];
+    const sum = n1.value + n2.value + remainder;
+    const currentValue = sum < 10 ? sum : parseInt(sum.toString()[1]);
     remainder = sum < 10 ? 0 : parseInt(sum.toString()[0], 10);
 
-    ans = currentValue + ans;
+    const resultNode = new Node(currentValue);
+
+    if (headNode) {
+      resultNode.next = headNode;
+    }
+
+    headNode = resultNode;
 
     return remainder;
   }
 
   const remainder = findSum(n1, n2);
 
-  return parseInt(remainder + ans, 10);
+  if (remainder) {
+    const finaltNode = new Node(remainder);
+    finaltNode.next = headNode;
+    headNode = finaltNode;
+  }
+
+  return headNode;
 }
 
 //Tests
@@ -76,7 +82,7 @@ const testOne = () => {
   five.next = nine;
   nine.next = two;
 
-  console.log(sumListFor(seven, five));
+  return sumListFor(seven, five);
 };
 
 //tests 921  + 76  = 997
@@ -86,7 +92,7 @@ const testTwo = () => {
 
   seven.next = six;
 
-  console.log(sumListFor(nine, seven));
+  return sumListFor(nine, seven);
 };
 
 //tests 5921 + 76  = 5997
@@ -97,12 +103,19 @@ const testThree = () => {
 
   seven.next = six;
 
-  console.log(sumListFor(five, seven));
+  return sumListFor(five, seven);
 };
 
-// testOne(); // 1308
-// testTwo(); // 997
-testThree(); // 5997
+let ans;
+
+// ans = testOne(); // 1308
+// ans = testTwo(); // 997
+ans = testThree(); // 5997
+
+while (ans) {
+  console.log(ans.value);
+  ans = ans.next;
+}
 
 //Time: O(n) - n being the longer linked-list
-//Space: (n) - at worst you'll have to make n fake nodes
+//Space: (n) - at worst you'll have to make n fake nodes and also the call stack will go n deep

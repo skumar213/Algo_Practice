@@ -1,26 +1,34 @@
 function sumListRev(n1, n2) {
-  let ans = "";
   let remainder = 0;
+  let headNode = null;
 
   while (n1 || n2) {
     const n1Value = n1 ? n1.value : 0;
     const n2Value = n2 ? n2.value : 0;
 
     const sum = n1Value + n2Value + remainder;
-    const currentValue = sum < 10 ? sum : sum.toString()[1];
-    remainder = sum < 10 ? 0 : parseInt(sum.toString()[0]);
+    const currentValue = sum < 10 ? sum : parseInt(sum.toString()[1]);
+    remainder = sum < 10 ? 0 : parseInt(sum.toString()[0], 10);
 
-    ans = currentValue + ans;
+    const resultNode = new Node(currentValue);
+
+    if (headNode) {
+      resultNode.next = headNode;
+    }
+
+    headNode = resultNode;
 
     n1 = n1 ? n1.next : null;
     n2 = n2 ? n2.next : null;
   }
 
   if (remainder) {
-    ans = remainder + ans;
+    const finaltNode = new Node(remainder);
+    finaltNode.next = headNode;
+    headNode = finaltNode;
   }
 
-  return parseInt(ans, 10);
+  return headNode;
 }
 
 //Tests
@@ -46,7 +54,7 @@ const testOne = () => {
   five.next = nine;
   nine.next = two;
 
-  console.log(sumListRev(seven, five));
+  return sumListRev(seven, five);
 };
 
 //tests 921 (129) + 76 (67) = 196
@@ -56,7 +64,7 @@ const testTwo = () => {
 
   seven.next = six;
 
-  console.log(sumListRev(nine, seven));
+  return sumListRev(nine, seven);
 };
 
 //tests 5921 (1295) + 76 (67) = 1362
@@ -67,12 +75,19 @@ const testThree = () => {
 
   seven.next = six;
 
-  console.log(sumListRev(five, seven));
+  return sumListRev(five, seven);
 };
 
-// testOne() // 912
-// testTwo(); // 196
-// testThree(); // 1362
+let ans;
+
+// ans = testOne() // 912
+// ans = testTwo(); // 196
+ans = testThree(); // 1362
+
+while (ans) {
+  console.log(ans.value);
+  ans = ans.next;
+}
 
 //Time: O(n) - n being the longer linked-list
 //Space: (1) - no extra space is used
