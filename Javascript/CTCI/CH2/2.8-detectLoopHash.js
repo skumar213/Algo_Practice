@@ -64,7 +64,7 @@ const falseCheck = () => {
   console.log(detectLoop(a));
 };
 
-trueCheck(); // true;
+trueCheck(); // node b
 falseCheck(); // false
 
 //Time: O(n) - need to go through all the nodes once in the worst case
