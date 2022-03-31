@@ -91,3 +91,6 @@ const falseCheck = () => {
 
 trueCheck(); // true;
 falseCheck(); // false
+
+//Time: O(n + m) - need to go through all the nodes once in the worst case
+//Space: O(1) - hashtable size remains the same with input size
