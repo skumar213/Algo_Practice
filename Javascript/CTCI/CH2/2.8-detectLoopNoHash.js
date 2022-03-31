@@ -1,23 +1,23 @@
-function detectLoop(head) {
-  const isLoop = isLoopCheck(head);
-
-  if (!isLoop) return false;
-
-  return isLoop.next.next;
-}
-
-function isLoopCheck(node) {
+function detectLoop(node) {
   let slow = node.next;
   let fast = node.next ? node.next.next : null;
 
   while (slow && fast) {
-    if (slow === fast) return slow;
+    if (slow === fast) break;
 
     slow = slow.next;
     fast = fast.next ? fast.next.next : null;
   }
 
-  return false;
+  if (!slow || !fast) return false;
+
+  slow = node;
+  while (slow !== fast) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+
+  return slow;
 }
 
 //Tests
@@ -64,5 +64,5 @@ const falseCheck = () => {
 trueCheck(); // node c;
 falseCheck(); // false
 
-//Time: O(n) - need to go through all the nodes once in the worst case
+//Time: O(n) - need to go through all the nodes
 //Space: O(1) - no extra space is used
