@@ -1,6 +1,6 @@
-function detectLoop(node) {
-  let slow = node.next;
-  let fast = node.next ? node.next.next : null;
+function detectLoop(head) {
+  let slow = head.next;
+  let fast = head.next ? head.next.next : null;
 
   while (slow && fast) {
     if (slow === fast) break;
@@ -11,7 +11,7 @@ function detectLoop(node) {
 
   if (!slow || !fast) return false;
 
-  slow = node;
+  slow = head;
   while (slow !== fast) {
     slow = slow.next;
     fast = fast.next;
