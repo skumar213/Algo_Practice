@@ -4,9 +4,8 @@ class Node{
     this.next = null
   }
 }
-//----------------------------
 
-class Stack{
+class StackLinkedList{
   constructor() {
     this.stack = null;
   }
@@ -36,7 +35,7 @@ class Stack{
   }
 }
 
-const stack = new Stack();
+const stack = new StackLinkedList();
 
 stack.push(1);
 stack.push(2);
