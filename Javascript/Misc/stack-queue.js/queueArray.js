@@ -1,4 +1,4 @@
-class Queue {
+class QueueArray {
   constructor() {
     this.queue = [];
     this.first = null;
@@ -38,7 +38,7 @@ class Queue {
   }
 }
 
-const queue = new Queue();
+const queue = new QueueArray();
 
 queue.add(1);
 queue.add(2);

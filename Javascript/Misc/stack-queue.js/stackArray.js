@@ -1,4 +1,4 @@
-class Stack {
+class StackArray {
   constructor() {
     this.stack = [];
     this.top = null;
@@ -27,7 +27,7 @@ class Stack {
   }
 }
 
-const stack = new Stack();
+const stack = new StackArray();
 
 stack.push(1);
 stack.push(2);
