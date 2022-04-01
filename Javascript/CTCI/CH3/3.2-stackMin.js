@@ -1,69 +1,68 @@
 class StackNode {
   constructor(value) {
     this.value = value;
+    this.next = null;
     this.prevMin = null;
   }
 }
 
 class Stack {
   constructor() {
-    this.stack = [];
-    this.top = null;
+    this.stack = null;
   }
 
   push(item) {
     const node = new StackNode(item);
 
-    if (this.stack.length === 0) {
-      node.min = node.value;
+    if (this.stack === null) {
+      node.prevMin = node.value;
     } else {
-      const prevItem = this.stack[this.stack.length - 1];
-
-      if (prevItem.min < node.value) {
-        node.min = prevItem.min;
+      if (this.stack.prevMin < node.value) {
+        node.prevMin = this.stack.prevMin;
       } else {
-        node.min = node.value;
+        node.prevMin = node.value;
       }
     }
 
-    this.stack.push(node);
-    this.top = node;
+    node.next = this.stack;
+    this.stack = node;
   }
 
   pop() {
-    if (this.top === null) return "Empty Stack";
+    if (this.stack === null) return "Empty Stack";
 
-    const removedItem = this.stack.pop();
-    this.top = this.stack.length > 0 ? this.stack[this.stack.length - 1] : null;
+    const removedItem = this.stack;
+    this.stack = this.stack.next;
+
     return removedItem;
   }
 
   peek() {
-    if (this.top === null) return "Empty Stack";
-    return this.top;
+    if (this.stack === null) return "Empty Stack";
+    return this.stack;
   }
 
   isEmpty() {
-    return this.top === null;
+    return this.stack === null;
   }
 
   min() {
-    return this.top.min;
+    if (this.stack === null) return "Empty Stack";
+
+    return this.stack.prevMin;
   }
 }
 
+//Test
 const stack = new Stack();
 
 stack.push(3);
-stack.push(1);
 stack.push(2);
+stack.push(1);
 
 stack.pop();
-stack.pop();
+// stack.pop();
 // stack.pop();
 
 console.log(stack.min());
-console.log(stack.stack);
-
-
-//Working but need to redo it using a linked list instead of an array for the stack
+console.log(stack.peek());
