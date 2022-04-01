@@ -71,7 +71,11 @@ class ThreeStacks {
 
     const rmThree = this.stack.splice(this.threeTop, 1);
 
-    if (this.stack.length === 0) this.threeTop = null;
+    if (
+      this.stack.length === 0 ||
+      (this.stack[this.threeTop] !== 0 && !this.stack[this.threeTop])
+    )
+      this.threeTop = null;
 
     return rmThree[0];
   }
@@ -122,15 +126,17 @@ threeStacks.oneRemove();
 threeStacks.oneRemove();
 threeStacks.oneRemove();
 
-threeStacks.twoRemove();
-threeStacks.twoRemove();
-threeStacks.twoRemove();
+// threeStacks.twoRemove();
+// threeStacks.twoRemove();
+// threeStacks.twoRemove();
 
 threeStacks.threeRemove();
 threeStacks.threeRemove();
 threeStacks.threeRemove();
 
 console.log(threeStacks.onePeek());
+console.log(threeStacks.twoPeek());
+console.log(threeStacks.threePeek());
 console.log(threeStacks.stack);
 console.log(threeStacks.oneTop);
 console.log(threeStacks.twoTop);
