@@ -34,6 +34,15 @@ class SetOfStacks {
   isEmpty() {
     return this.stack.length === 0;
   }
+
+  popAt(index) {
+    if (this.stack.length === 0 || !this.stack[index]) return "Empty Stack";
+
+    const rmItem = this.stack[index].pop();
+
+    if (this.stack[index].length === 0) this.stack.splice(index, 1);
+    return rmItem;
+  }
 }
 
 const stack = new SetOfStacks(2);
@@ -54,5 +63,9 @@ stack.pop();
 // stack.pop();
 // stack.pop();
 
+stack.popAt(1);
+// stack.popAt(1);
+
+console.log(stack.stack);
 console.log(stack.peek());
 console.log(stack.isEmpty());
