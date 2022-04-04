@@ -29,32 +29,44 @@ class StackArray {
 
 class MyQueue {
   constructor() {
-    this.stackOne = new StackArray();
-    this.stackTwo = new StackArray();
+    this.stackNew = new StackArray();
+    this.stackOld = new StackArray();
   }
 
   add(item) {
-    while (!this.stackOne.isEmpty()) {
-      const rmItem = this.stackOne.pop();
-      this.stackTwo.push(rmItem);
-    }
-
-    this.stackOne.push(item);
-
-    while (!this.stackTwo.isEmpty()) {
-      const rmItem = this.stackTwo.pop();
-      this.stackOne.push(rmItem);
-    }
+    this.stackNew.push(item);
   }
 
   remove() {
-    if (this.stackOne.isEmpty()) return "Empty Stack";
+    if (this.stackOld.isEmpty() && this.stackNew.isEmpty())
+      return "Empty Stack";
+    this.shfitStack();
 
-    const rmItem = this.stackOne.pop();
+    const rmItem = this.stackOld.pop();
     return rmItem;
+  }
+
+  peek() {
+    if (this.stackOld.isEmpty() && this.stackNew.isEmpty())
+      return "Empty Stack";
+    return this.stackOld.peek();
+  }
+
+  isEmpty() {
+    return this.stackOld.isEmpty() && this.stackNew.isEmpty();
+  }
+
+  shfitStack() {
+    if (this.stackOld.isEmpty()) {
+      while (!this.stackNew.isEmpty()) {
+        const item = this.stackNew.pop();
+        this.stackOld.push(item);
+      }
+    }
   }
 }
 
+//Test
 const queue = new MyQueue();
 
 queue.add(1);
@@ -64,4 +76,8 @@ queue.add(4);
 queue.add(5);
 
 console.log(queue.remove()); // 1
-console.log(queue.stackOne);
+console.log(queue.peek()); //2
+console.log(queue.stackOld, queue.stackNew);
+
+//Time: O(n) - the pop method has to remove all items and then add it back each time
+//Space: O(n) - the size of the stack
