@@ -53,15 +53,7 @@ class AnimalShelter {
     if (!rmItem) return { value: "No Dogs left" };
 
     if (rmItem === this.head) {
-      this.head = this.head.prev;
-
-      if (this.head) {
-        this.head.next = null;
-      } else {
-        this.tail = null;
-      }
-
-      return rmItem;
+      return this.dequeueAny();
     } else if (rmItem === this.tail) {
       this.tail = this.tail.next;
       return rmItem;
@@ -85,15 +77,7 @@ class AnimalShelter {
     if (!rmItem) return { value: "No Cats left" };
 
     if (rmItem === this.head) {
-      this.head = this.head.prev;
-
-      if (this.head) {
-        this.head.next = null;
-      } else {
-        this.tail = null;
-      }
-
-      return rmItem;
+      return this.dequeueAny();
     } else if (rmItem === this.tail) {
       this.tail = this.tail.next;
       return rmItem;
