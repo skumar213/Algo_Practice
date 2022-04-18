@@ -89,5 +89,5 @@ console.log(pathFinder(graph, three, zero)); //true
 console.log(pathFinder(graph, zero, five)); //false
 console.log(pathFinder(graph, five, zero)); //false
 
-//Time: O(n) - need to visit each node
+//Time: O(n) - need to visit each node in the worst case
 //Space: O(1) - no extra space is used
