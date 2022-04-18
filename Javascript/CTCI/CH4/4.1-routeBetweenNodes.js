@@ -16,8 +16,8 @@ function pathFinder(graph, n1, n2) {
   //check n1 -> n2
   if (isPath(n1, n2)) return true;
 
-  //clear visited property
-  clearVisited(n1);
+  //reset visited property
+  resetVisited(n1);
 
   //check n2 - n1
   return isPath(n2, n1);
@@ -40,7 +40,7 @@ function isPath(n1, n2) {
   return false;
 }
 
-function clearVisited(n1) {
+function resetVisited(n1) {
   const queue = [n1];
 
   while (queue.length) {
@@ -91,3 +91,5 @@ console.log(pathFinder(graph, five, zero)); //false
 
 //Time: O(n) - need to visit each node in the worst case
 //Space: O(1) - no extra space is used
+
+//This uses BFS
