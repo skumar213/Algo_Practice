@@ -17,14 +17,12 @@ _n = 7
 logs = ["30 99 sign-in", "30 105 sign-out", "12 100 sign-in", "20 80 sign-in", "12 120 sign-out", "20 101 sign-out", "21 110 sign-in"]
 maxSpan = 20_
 
-```
 ID  Sign in  Sign out  Time delta
 --  -------  --------  ----------
 30  99       105       6
 12  100      120       20
 20  80       101       21
 21  110
-```
 
 The users with id's 30 and 12 were not signed in for more than _maxSpan_ = 20 seconds. In sorted numerical order, the return array is _["12", "30"]_.
 */
