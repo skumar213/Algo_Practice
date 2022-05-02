@@ -10,13 +10,6 @@ output: 2
 
 */
 
-/*
-1) go through and if its an open paren, add it to the queue
-2) if you hit a closed paren, remove the item from the queue and see if it is the opposite paren
-    1) if it is you move on
-    2) if not you add to the count
-*/
-
 function minParen(str) {
   let open = 0;
   let closed = 0;
