@@ -50,7 +50,7 @@ const smallest_subarray_sum = function (s, arr) {
 Explination
 
 1) This uses the sliding window technique. The sum will keep adding up until it is >= the target.
-2) Then the inner while loop will keep going until the sum is no longer >= to the target.
+2) Then the inner while loop will keep going until the sum is no longer >= to the target. While removing the start index
       1) This will also keep updating the ans variable with the shorted subarry. This works because
           if the sum is less than the target then we know no individual number in the currently selected
           subarray is larger than the sum so it must add the next one. And as its reducing the subarray length it
