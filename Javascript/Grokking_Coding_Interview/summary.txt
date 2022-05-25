@@ -1,1 +1,2 @@
 1) Sliding window method: good for when we are asked to find or calculate something among all the subarrays (or sublists) of a given size
+2) Two pointers method: In problems where we deal with _sorted_ arrays (or LinkedLists) and need to find a set of elements that fulfill certain constraints, the Two Pointers approach becomes quite useful.
