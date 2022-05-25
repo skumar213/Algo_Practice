@@ -51,3 +51,14 @@ const longest_substring_with_k_distinct = function (str, k) {
 
 //Time: O(n) - Outer for loop will go through the string once and the inner while loop will at worst be n
 //Space: O(k) - The history object will grow to size k to keep track of all current letters
+
+/*
+Explination
+
+1) Uses sliding window method. Keeps adding letters to the history object until its key length is equal to k
+2) Then it will only increment the letters already in the histroy, otherwise it will run a while loop closing the
+    sliding window one letter at a time until there are less than k letters in the history object
+3) Each iteration of the for loop will update the answer varialbe with the longest subarry
+
+
+*/
