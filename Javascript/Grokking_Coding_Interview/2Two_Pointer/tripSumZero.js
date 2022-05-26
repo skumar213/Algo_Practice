@@ -24,17 +24,26 @@ const search_triplets = function (arr) {
     return 0;
   });
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length - 1; i++) {
     let p1 = i + 1;
     let p2 = arr.length - 1;
 
+    if (arr[i] === arr[i + 1]) {
+      continue;
+    }
+
     while (p1 < p2) {
       let sum = arr[i] + arr[p1] + arr[p2];
-
       if (sum === 0) {
         triplets.push([arr[i], arr[p1], arr[p2]]);
         p1++;
         p2--;
+        while (arr[p1] === arr[p1 - 1] && p1 < p2) {
+          p1++;
+        }
+        while (arr[p2] === arr[p2 + 1] && p1 < p2) {
+          p2--;
+        }
       } else if (sum > 0) {
         p2--;
       } else {
