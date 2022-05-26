@@ -47,7 +47,7 @@ const search_triplets = function (arr) {
 };
 
 //Time: O(n^2) - theres two nested loops
-//Space: O(1) - sort is done in place and the triplets array is part of the output
+//Space: O(n) - sort takes n space
 
 /*
 Explination
