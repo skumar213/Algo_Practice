@@ -40,7 +40,7 @@ const remove_duplicates = function(arr) {
 
 /*
 Explination
-Uses the sliding window method
+Uses the two pointer method
 
 1) Iterates through the array searching for a unique number
     1) Once found it will only increment the pointer (the replacement spot) if there is no current duplicate to look out for
