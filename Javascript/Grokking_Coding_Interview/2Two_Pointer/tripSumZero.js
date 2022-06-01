@@ -15,45 +15,48 @@ Explanation: There are two unique triplets whose sum is equal to zero.
 
 */
 
-const search_triplets = function (arr) {
-  const triplets = [];
+const search_triplets = function (nums) {
+  const ans = []
 
-  arr.sort((a, b) => {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-  });
+    nums.sort((a,b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0
+    })
 
-  for (let i = 0; i < arr.length - 1; i++) {
-    let p1 = i + 1;
-    let p2 = arr.length - 1;
 
-    if (arr[i] === arr[i + 1]) {
-      continue;
+    for (let i = 0; i < nums.length; i++) {
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+        let front = i + 1
+        let back = nums.length - 1;
+
+        while (front < back) {
+            let sum = nums[i] + nums[front] + nums[back];
+
+            if (sum === 0) {
+                ans.push([nums[i], nums[front], nums[back]])
+                front++
+                back--
+
+                while (front < back && nums[front] === nums[front - 1]) {
+                    front++
+                }
+
+                while (front < back && nums[back] === nums[back + 1]) {
+                    back--
+                }
+            } else if (sum > 0) {
+                back--
+            } else {
+                front++
+            }
+        }
     }
 
-    while (p1 < p2) {
-      let sum = arr[i] + arr[p1] + arr[p2];
-      if (sum === 0) {
-        triplets.push([arr[i], arr[p1], arr[p2]]);
-        p1++;
-        p2--;
-        while (arr[p1] === arr[p1 - 1] && p1 < p2) {
-          p1++;
-        }
-        while (arr[p2] === arr[p2 + 1] && p1 < p2) {
-          p2--;
-        }
-      } else if (sum > 0) {
-        p2--;
-      } else {
-        p1++;
-      }
-    }
-  }
-
-  return triplets;
+    return ans;
 };
+
 
 //Time: O(n^2) - theres two nested loops
 //Space: O(n) - sort takes n space
