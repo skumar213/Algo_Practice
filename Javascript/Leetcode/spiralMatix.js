@@ -55,3 +55,49 @@ var spiralOrder = function (matrix) {
 
 Each call concats with the result of the recursive call to make the final result
 */
+
+//Iteravitley with Time of (m *n) and Space of O(1)
+
+var spiralOrder = function (matrix) {
+  const res = [];
+
+  if (matrix.length === 0) return res;
+
+  let rowStart = 0;
+  let colStart = 0;
+  let rowEnd = matrix.length - 1;
+  let colEnd = matrix[0].length - 1;
+
+  while (res.length === 0 || res.length < matrix[0].length * matrix.length) {
+    //right
+    for (let i = colStart; i <= colEnd; i++) {
+      res.push(matrix[rowStart][i]);
+    }
+
+    //down
+    for (let j = rowStart + 1; j < rowEnd; j++) {
+      res.push(matrix[j][colEnd]);
+    }
+
+    if (rowStart !== rowEnd) {
+      //left
+      for (let k = colEnd; k >= colStart; k--) {
+        res.push(matrix[rowEnd][k]);
+      }
+    }
+
+    if (colStart !== colEnd) {
+      //up
+      for (let l = rowEnd - 1; l > rowStart; l--) {
+        res.push(matrix[l][colStart]);
+      }
+    }
+
+    rowStart++;
+    rowEnd--;
+    colStart++;
+    colEnd--;
+  }
+
+  return res;
+};
