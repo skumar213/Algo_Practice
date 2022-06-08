@@ -49,8 +49,6 @@ class Helper{
 
 /*
 1) Uses the first element of preorder as the root and then constructs a tree around it from inorder
-    1) From the first elements index in inorder you build a tree from everything to the left or it and then the same from all items to the left
-
-
-
+    1) From the first elements index in inorder you build a tree from everything to the left of it and then the same from all items to the right
+    2) then repeat with i + 1 item in preorder
 */
