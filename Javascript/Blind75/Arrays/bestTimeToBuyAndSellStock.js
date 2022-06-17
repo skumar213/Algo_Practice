@@ -30,3 +30,34 @@ Trick/Pattern
 
 This works because the highest profit will always occur after the lowest number, since the goal here is to buy low and then sell high. That's why you keep changing the lowest number and comparing profits to the current max profit
 */
+
+
+//----------
+//I was also able to solve it with a sliding window that is actually faster than the proposed solution but the space an time are the same as above
+/*
+1) How it work is by iterating through the array and if the profit is negative you closed the window until its no longer negative.
+2) It keeps checking the profit until it finds a lower number and then checks the profits of that. This is slightly faster because it is only checking the profits of the lowest numbers.
+
+
+*/
+
+var maxProfit = function(prices) {
+  let profit = 0
+
+  let front = 0
+
+  for (let end = 1; end < prices.length; end++) {
+      let currProfit = prices[end] - prices[front];
+
+      while (currProfit < 0 && front < end) {
+          front++
+          currProfit = prices[end] - prices[front];
+      }
+
+      if (currProfit > profit) {
+          profit = currProfit
+      }
+  }
+
+  return profit
+};
