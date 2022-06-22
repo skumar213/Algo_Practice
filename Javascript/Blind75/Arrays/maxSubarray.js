@@ -25,7 +25,7 @@ Trick/Pattern
 2) If the current number is larger than the previous sum + the current number then you make the sum the current number, otherwise the sum is the previous sum + the current number
 3) then you check if its larger than the max
 
-this works because you need to find the largest contiguous subarray. if the current number is larger than the previous sum + the current number, then you want to make the sum the current number because the largest subarray will start here
+This works because you need to find the largest contiguous subarray. if the current number is larger than the previous sum + the current number, then you want to make the sum the current number because the largest subarray will start here
 
 
 */
