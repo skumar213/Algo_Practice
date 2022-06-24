@@ -23,4 +23,12 @@ console.log(insertionSort([5, 4, 3, 2, 1]));
 //Time: O(n^2) - have to go through the array again for each element
 //Space: O(1) - constant space is used
 
-//How it works: it checks paris at a time and takes the element at j and keeps bringing it back until its no longer smaller than the one before it
+//How it works: it checks pairs at a time and takes the element at j and keeps bringing it back until its no longer smaller than the one before it
+
+/*
+[5, 4, 3, 2, 1]
+[4, 5, 3, 2, 1]
+[3, 4, 5, 2, 1]
+[2, 3, 4, 5, 1]
+[1, 2, 3, 4, 5]
+*/
