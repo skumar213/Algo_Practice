@@ -50,16 +50,17 @@ function crush(str) {
   const stack = [str[0], str[1]]
 
   for (let i = 2; i < str.length; i++) {
-    const stackOne = stack[stack.length - 1]
-    const stackTwo = stack[stack.length - 2]
+    const topOne = stack[stack.length - 1];
+    const topTwo = stack[stack.length - 2];
 
-    if (str[i] === stackOne && str[i] === stackTwo) {
-      stack.pop();
-      stack.pop();
+    if ((topOne === str[i] && topTwo === str[i]) && str[i] !== str[i + 1]){
+      while (stack[stack.length - 1] === str[i]) {
+        stack.pop();
+      }
     } else {
       stack.push(str[i])
     }
   }
 
-  return stack.join('')
+  return stack.join("")
 }
