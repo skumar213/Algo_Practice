@@ -41,3 +41,25 @@ console.log(crush(input2));
 console.log(crush(input3));
 console.log(crush(input4));
 console.log(crush(input5));
+
+//Below is the iterative solution
+
+function crush(str) {
+  if (str.length < 3) return str
+
+  const stack = [str[0], str[1]]
+
+  for (let i = 2; i < str.length; i++) {
+    const stackOne = stack[stack.length - 1]
+    const stackTwo = stack[stack.length - 2]
+
+    if (str[i] === stackOne && str[i] === stackTwo) {
+      stack.pop();
+      stack.pop();
+    } else {
+      stack.push(str[i])
+    }
+  }
+
+  return stack.join('')
+}
