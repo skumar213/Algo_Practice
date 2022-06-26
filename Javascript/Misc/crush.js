@@ -30,3 +30,38 @@ console.log(crush(input2));
 console.log(crush(input3));
 console.log(crush(input4));
 console.log(crush(input5));
+
+
+//crush k or more elements
+
+function crush(str) {
+  const stack = [];
+
+  for (let i = 0; i < str.length; i++) {
+    if (!stack.length) {
+      stack.push([str[i], 1]);
+    } else {
+      const prevItem = stack[stack.length - 1]
+
+      if (stack.length && prevItem[0] === str[i]) {
+        stack[stack.length - 1][1]++
+
+        if (stack[stack.length - 1][1] >= 3 && str[i] !== str[i + 1]) {
+          stack.pop()
+        }
+      } else {
+        stack.push([str[i], 1]);
+      }
+    }
+  }
+
+
+  let ans = "";
+
+  for (let [char, count] of stack) {
+    ans += char.repeat(count);
+  }
+
+  return ans;
+
+}
